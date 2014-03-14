@@ -134,8 +134,8 @@ namespace Audio {
     const AudioSample AudioPacket::at(size_t index) const
     {
         assert(m_memory.get() != nullptr);
-        // Transform our byte index into a AudioSample index (sizeof(AudioSample) == bitsPerBlocK)
-        const size_t realIndex = index * m_format.bitsPerBlock; 
+        // Transform our byte index into a AudioSample index (sizeof(AudioSample) == bitsPerSample / 8 * channels)
+        const size_t realIndex = index * m_format.bitsPerSample / 8 * m_format.channels; 
         if(realIndex >= m_size)
             throw std::out_of_range("");
 
