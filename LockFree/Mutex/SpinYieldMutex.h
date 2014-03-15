@@ -19,57 +19,48 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-// DX LockFree - RWMutex describes a multi-reader or single writer mutex-like object
+// DX LockFree - SpinYieldMutex attempts to spin and yields then yields if the lock was not obtained
 // Author: Eli Pinkerton
 // Date: 3/14/14
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma once
+#include "SpinMutex.h"
 
 namespace DX {
 namespace LockFree {
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // RWMutex
 
-    /*! \brief RWMutex is a general descriptor for a class of mutex-like objects that support
-        multiple readers or a single writer. Unlike their Mutex counterparts, RWMutexes have two 
-        different lock() and unlock() methods - one set for writers and one set for readers.
-    */
-    class RWMutex
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // SpinYieldMutex
+
+    // Arbitrary for now, best results TBD
+    #ifndef DEFAULT_YIELD_TICKS
+        #define DEFAULT_YIELD_TICKS 10
+    #endif
+
+    class SpinYieldMutex : public SpinMutex
     {
     public:
-        RWMutex();
-        virtual ~RWMutex() = 0;
-        
-        /*! Locks this RWMutex as a reader. Depending on the state of the object, this call may or
-            may not block. 
+        /*! Default constructor
+            \param[in] maxYieldTicks    Number of spins until the mutex yields
+        */
+        SpinYieldMutex(const size_t maxYieldTicks = DEFAULT_YIELD_TICKS);
+        ~SpinYieldMutex();
 
-            \note This call is gauranteed to not block if only readers have locks. Unspecified 
-            otherwise.        
-        */
-        virtual void lockReader() const = 0;
-        /*! Locks this RWMutex as a writer. Depending on the state of the object, this call may or
-            may not block.
-
-            \note This call is gauranteed not to block if there are no other readers or writers that
-            have the RWMutex locked. Unspecified otherwise.
-        */
-        virtual void lockWriter() const = 0;
-        /*! Releases a reader lock on the RWMutex. This call does not block. 
-           \note Assumes that this call has been properly paired with a call to lockReader()        
-        */
-        virtual void unlockReader() const = 0;
-        /*! Releases a writerer lock on the RWMutex. This call does not block. 
-            \note Assumes that this call has been properly paired with a call to lockWriter()
-        */
-        virtual void unlockWriter() const = 0;
+        /*!< Calls to lock() will block until no other thread has ownership of the mutex. */
+        void lock() const;
+        /*!< Calls to tryLock() will not block. Ownership of the mutex is attempted. */
+        bool tryLock() const;
+        /*!< Non-blocking. Calls to unlock() will relinquish ownership of the mutex. */
+        void unlock() const;
     private:
+        const   size_t m_maxYieldTicks;
+
         /*
             Copy and move constructors are hidden to prevent the compiler from automatically generating
             them for us. This class is currently NOT copyable or movable.
         */
-        RWMutex(const RWMutex&);
-        RWMutex(RWMutex&&);
+        SpinYieldMutex(const SpinYieldMutex&);  // Do not use
+        SpinYieldMutex(SpinYieldMutex&&);       // Do not use
     };
 
 }

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Mutex">
+      <UniqueIdentifier>{2be59d9d-b296-43e9-ae06-c95afcd51802}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Containers">
+      <UniqueIdentifier>{60499f82-d23e-4288-b219-4897f2ade676}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\CacheLine.h" />
+    <ClInclude Include="..\LockFreePreamble.h" />
+    <ClInclude Include="..\LockFreeLib.h" />
+    <ClInclude Include="..\Mutex\CyclicSpinBarrier.h">
+      <Filter>Mutex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Mutex\Mutex.h">
+      <Filter>Mutex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Mutex\SpinBarrier.h">
+      <Filter>Mutex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Mutex\SpinMutex.h">
+      <Filter>Mutex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Mutex\SpinRecursiveMutex.h">
+      <Filter>Mutex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Mutex\SpinRWMutex.h">
+      <Filter>Mutex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Mutex\SpinYieldMutex.h">
+      <Filter>Mutex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Mutex\StdLocks.h">
+      <Filter>Mutex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Mutex\AbstractBarrier.h">
+      <Filter>Mutex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Mutex\RWMutex.h">
+      <Filter>Mutex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Containers\AbstractQueue.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Containers\ConcurrentQueue.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Containers\ConcurrentStream.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Mutex\CyclicSpinBarrier.cpp">
+      <Filter>Mutex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mutex\Mutex.cpp">
+      <Filter>Mutex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mutex\SpinBarrier.cpp">
+      <Filter>Mutex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mutex\SpinMutex.cpp">
+      <Filter>Mutex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mutex\SpinRecursiveMutex.cpp">
+      <Filter>Mutex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mutex\SpinRWMutex.cpp">
+      <Filter>Mutex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mutex\SpinYieldMutex.cpp">
+      <Filter>Mutex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mutex\StdLocks.cpp">
+      <Filter>Mutex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mutex\AbstractBarrier.cpp">
+      <Filter>Mutex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mutex\RWMutex.cpp">
+      <Filter>Mutex</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -31,10 +31,10 @@
 
 namespace DX {
 namespace LockFree {
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // AbstractBarrier
-
 
     /*! \brief An AbstractBarrier is designed for use between multiple threads, typically blocking
         unparallelelizable sections of code. Any class derived off of an Abstract Barrier will block

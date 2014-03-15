@@ -26,7 +26,7 @@ namespace LockFree {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    // CyclicSpinBarrier
+    // CyclicSpinBarrier impl
 
     CyclicSpinBarrier::CyclicSpinBarrier(size_t numThreads) 
         : AbstractBarrier(numThreads), m_initial(numThreads)
@@ -40,7 +40,7 @@ namespace LockFree {
     void CyclicSpinBarrier::wait() const
     {
         // Calls to wait while the counter is still resetting will block here
-        m_reset.lock(false);
+        m_reset.lockReader();
         assert(m_count > 0); // wait called too many times
         const size_t count = m_count > 0 ? --m_count : 0;   // Snapshot what the count was when we enter
         {
@@ -50,8 +50,8 @@ namespace LockFree {
                     Relinquish our hold on the reentrant lock, grab one as a writer.
                     This will block until every other thread waiting has finished their wait
                 */
-                m_reset.unlock(false);
-                m_reset.lock(true);
+                m_reset.unlockReader();
+                m_reset.lockWriter();
             }
             while(m_count > 0)
             {
@@ -60,12 +60,12 @@ namespace LockFree {
             if(count == 0)
             {
                 m_count = m_initial;
-                m_reset.unlock(true);
+                m_reset.unlockWriter();
             }
         }
         // The "resetter" has already unlocked their hold on the reentrant lock
         if(count != 0)  // Rely on local storage so we don't get multiple unlockers
-            m_reset.unlock(false);
+            m_reset.unlockReader();
     }
 
 }

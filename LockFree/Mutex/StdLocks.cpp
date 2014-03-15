@@ -17,21 +17,27 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110 - 1301  USA
 */ /////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "AbstractBarrier.h"
+#include "StdLocks.h"
+
+#include <mutex>
 
 namespace DX {
 namespace LockFree {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    // AbstractBarrier impl
+    // StdLock impl
 
-    AbstractBarrier::AbstractBarrier(size_t numThreads) : m_count(numThreads)
+    StdLock::StdLock(std::mutex& _mutex) : m_mutex(&_mutex)
     {
+        if(m_mutex)
+            m_mutex->lock();
     }
 
-    AbstractBarrier::~AbstractBarrier()
+    StdLock::~StdLock()
     {
+        if(m_mutex)
+            m_mutex->unlock();
     }
 
 }

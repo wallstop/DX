@@ -17,21 +17,47 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110 - 1301  USA
 */ /////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "AbstractBarrier.h"
+#include "SpinBarrier.h"
+#include "SpinYieldMutex.h" // For the DEFAULT_YIELD_TICKS definition
+
+#include <thread>
 
 namespace DX {
 namespace LockFree {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    // AbstractBarrier impl
+    // SpinBarrier impl
 
-    AbstractBarrier::AbstractBarrier(size_t numThreads) : m_count(numThreads)
+    SpinBarrier::SpinBarrier(size_t numThreads) : AbstractBarrier(numThreads), m_initial(numThreads)
     {
     }
 
-    AbstractBarrier::~AbstractBarrier()
+    SpinBarrier::~SpinBarrier()
     {
+    }
+
+    void SpinBarrier::wait() const
+    {
+        assert(m_count > 0); // wait called too many times
+        if(m_count > 0)
+            --m_count;
+
+        // TODO: Base this lock off of SpinYieldMutex
+        size_t currentTicks = 0;
+        while(m_count > 0)
+        {
+            if(++currentTicks > DEFAULT_YIELD_TICKS)
+            {
+                std::this_thread::yield();
+                currentTicks = 0;
+            }
+        }
+    }
+
+    void SpinBarrier::reset()
+    {
+        m_count = m_initial;
     }
 
 }

@@ -19,57 +19,55 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-// DX LockFree - RWMutex describes a multi-reader or single writer mutex-like object
+// DX LockFree - SpinBarrier is a Barrier based on a similar yielding mechanic to SpinYieldMutex
 // Author: Eli Pinkerton
 // Date: 3/14/14
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma once
 
+#include "AbstractBarrier.h"
+
 namespace DX {
 namespace LockFree {
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // RWMutex
 
-    /*! \brief RWMutex is a general descriptor for a class of mutex-like objects that support
-        multiple readers or a single writer. Unlike their Mutex counterparts, RWMutexes have two 
-        different lock() and unlock() methods - one set for writers and one set for readers.
-    */
-    class RWMutex
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // SpinBarrier
+
+    /*! \brief SpinBarrier is designed for use to synchronize workflow between multiple threads. 
+        Calls to wait() will block until some specified number of threads have called wait(), after
+        which all threads will unblock and continue execution.
+
+        \note SpinBarrier is a form of a single-use barrier. For continued use, call reset() in a 
+        threadsafe fashion.    
+    */    
+    class SpinBarrier : public AbstractBarrier
     {
     public:
-        RWMutex();
-        virtual ~RWMutex() = 0;
+        /*! Constructs a SpinBarrier that is set up to wait on some number of threads
+            \param[in] numThreads   The number of threads that are expected to use this barrier
+        */
+        SpinBarrier(size_t numThreads = 2);
+        ~SpinBarrier();
+
+        /*!< Blocks the current thread of execution until all other wait() calls have been made */
+        void wait() const;
+
+        /*! Resets the SpinBarrier to its initial state, for continued usage.
         
-        /*! Locks this RWMutex as a reader. Depending on the state of the object, this call may or
-            may not block. 
+            \note reset() is NOT thread safe. 
+        */
+        void reset();
 
-            \note This call is gauranteed to not block if only readers have locks. Unspecified 
-            otherwise.        
-        */
-        virtual void lockReader() const = 0;
-        /*! Locks this RWMutex as a writer. Depending on the state of the object, this call may or
-            may not block.
-
-            \note This call is gauranteed not to block if there are no other readers or writers that
-            have the RWMutex locked. Unspecified otherwise.
-        */
-        virtual void lockWriter() const = 0;
-        /*! Releases a reader lock on the RWMutex. This call does not block. 
-           \note Assumes that this call has been properly paired with a call to lockReader()        
-        */
-        virtual void unlockReader() const = 0;
-        /*! Releases a writerer lock on the RWMutex. This call does not block. 
-            \note Assumes that this call has been properly paired with a call to lockWriter()
-        */
-        virtual void unlockWriter() const = 0;
     private:
+        size_t      m_initial;
+
         /*
             Copy and move constructors are hidden to prevent the compiler from automatically generating
             them for us. This class is currently NOT copyable or movable.
         */
-        RWMutex(const RWMutex&);
-        RWMutex(RWMutex&&);
+        SpinBarrier(const SpinBarrier&);
+        SpinBarrier(SpinBarrier&&);
     };
 
 }

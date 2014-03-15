@@ -17,22 +17,36 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110 - 1301  USA
 */ /////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "AbstractBarrier.h"
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// DX LockFree - First pass at an RAII object for locking and unlocking a std::mutex
+// Author: Eli Pinkerton
+// Date: 3/14/14
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+
+#include "../CacheLine.h"
+
+namespace std
+{
+    class mutex;
+}
 
 namespace DX {
 namespace LockFree {
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // AbstractBarrier impl
-
-    AbstractBarrier::AbstractBarrier(size_t numThreads) : m_count(numThreads)
+    /*! \brief StdLock is a RAII lockguard for some std::mutex which acquires a lock on it upon
+        creation, and releases the lock upon destruction.
+    */
+    class StdLock
     {
-    }
-
-    AbstractBarrier::~AbstractBarrier()
-    {
-    }
+    public:
+        StdLock(std::mutex& _mutex);
+        ~StdLock();
+    private:
+        std::mutex* m_mutex;
+    };
 
 }
 }

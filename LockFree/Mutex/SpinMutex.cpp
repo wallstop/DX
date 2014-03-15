@@ -17,21 +17,57 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110 - 1301  USA
 */ /////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "AbstractBarrier.h"
+#include "SpinMutex.h"
 
 namespace DX {
 namespace LockFree {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    // AbstractBarrier impl
+    // SpinMutex impl
 
-    AbstractBarrier::AbstractBarrier(size_t numThreads) : m_count(numThreads)
+    SpinMutex::SpinMutex() : m_lock(false)
     {
     }
 
-    AbstractBarrier::~AbstractBarrier()
+    SpinMutex::~SpinMutex()
     {
+    }
+
+    void SpinMutex::lock() const
+    {
+        while(m_lock.exchange(true))
+        {
+            // Spin out
+        }
+    }
+
+    bool SpinMutex::tryLock() const
+    {
+        return !m_lock.exchange(true);
+    }
+
+    void SpinMutex::unlock() const
+    {
+        m_lock = false;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // SpinLock impl
+
+    SpinLock::SpinLock(const SpinMutex& _mutex) : m_mutex(&_mutex)
+    {
+        assert(m_mutex); // We should have a handle on a valid mutex
+        if(m_mutex)
+            m_mutex->lock();
+    }
+
+    SpinLock::~SpinLock()
+    {
+        assert(m_mutex); // We should have a handle on a valid mutex
+        if(m_mutex)
+            m_mutex->unlock();
     }
 
 }

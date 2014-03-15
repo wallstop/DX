@@ -17,21 +17,46 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110 - 1301  USA
 */ /////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "AbstractBarrier.h"
+#include "SpinYieldMutex.h"
+
+#include <thread>
 
 namespace DX {
 namespace LockFree {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    // AbstractBarrier impl
+    // SpinYieldMutex impl
 
-    AbstractBarrier::AbstractBarrier(size_t numThreads) : m_count(numThreads)
+    SpinYieldMutex::SpinYieldMutex(const size_t maxYieldTicks) : SpinMutex(), m_maxYieldTicks(maxYieldTicks)
     {
     }
 
-    AbstractBarrier::~AbstractBarrier()
+    SpinYieldMutex::~SpinYieldMutex()
     {
+    }
+
+    void SpinYieldMutex::lock() const
+    {
+        size_t numTries = 0;
+        while(m_lock.exchange(true))
+        {
+            if(++numTries >= m_maxYieldTicks)   // >= just for sanity
+            {
+                numTries = 0;
+                std::this_thread::yield();
+            }
+        }
+    }
+
+    bool SpinYieldMutex::tryLock() const
+    {
+        return !m_lock.exchange(true);
+    }
+
+    void SpinYieldMutex::unlock() const
+    {
+        m_lock = false;
     }
 
 }
