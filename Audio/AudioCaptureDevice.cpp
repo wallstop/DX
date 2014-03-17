@@ -17,53 +17,51 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110 - 1301  USA
 */ /////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "WFABF.h"
-#include "../AudioPacket.h"
-
-#pragma warning(push)
-#pragma warning(disable : 4244) // Get rid of the pesky "double to size_t" conversion warning
+#include "AudioCaptureDevice.h"
+#include "impl/AudioCaptureDeviceImpl.h"
+#include "AudioPacket.h"
 
 namespace DX {
 namespace Audio {
 
-    DECLARE_FILTER(WFABF)
-
-    WFABF::WFABF() : AbstractFilter(std::shared_ptr<WFABF>(this), FREQUENCY_TRANSFORM)
+    AudioCaptureDevice::AudioCaptureDevice() : AbstractAudioDevice()
     {
     }
 
-    WFABF::~WFABF()
+    AudioCaptureDevice::~AudioCaptureDevice()
     {
     }
 
-    bool WFABF::transformPacket(const AudioPacket& in, AudioPacket& out) const
+    bool AudioCaptureDevice::initialize()
     {
-        // We were given empty buffers :(
-        if(in.byteSize() == 0 || out.byteSize() == 0)
-            return false;
+        return (m_impl && m_impl->initialize());
+    }
 
-        const double ratio = double(in.getAudioFormat().samplesPerSecond) / double(out.getAudioFormat().samplesPerSecond);
-        if(ratio == 1.)
-        {
-            out.assign(in.data(), in.byteSize());
-            return true;
-        }
-
-        const size_t maxSamples = out.numSamples();
-
-        for(size_t i = 0; i < maxSamples; ++i)
-            out[i] = in.at(size_t(double(i) * ratio));
-
+    inline bool AudioCaptureDevice::isCaptureDevice() const
+    {
         return true;
     }
 
-    std::string WFABF::name() const
+    AudioPacket AudioCaptureDevice::readFromBuffer()
     {
-        static const std::string name("wallstop's Fast and Bad Filter.");
-        return name;
+        if(m_impl)
+            return m_impl->readFromBuffer();
+        return BAD_BUFFER;
     }
 
-}
-}
+    bool AudioCaptureDevice::readFromBuffer(AudioStream& out, TaskCallback* callback)
+    {
+        return (m_impl && m_impl->readFromBuffer(out, callback));
+    }
 
-#pragma warning(pop)
+    bool AudioCaptureDevice::writeToBuffer(const AudioPacket& in, const AbstractFilter& filter)
+    {
+        return (m_impl && m_impl->writeToBuffer(in, filter));
+    }
+
+    bool AudioCaptureDevice::writeToBuffer(AudioStream& in, const AbstractFilter& filter, TaskCallback* callback)
+    {
+        return (m_impl && m_impl->writeToBuffer(in, filter, callback));
+    }
+}
+}

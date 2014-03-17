@@ -229,6 +229,7 @@ namespace Audio {
     size_t determineBufferSize(const AudioPacket& in, const AudioFormat& outFormat)
     {
         assert(in.isValid());
+        assert(outFormat != AudioFormat());
 
         #if defined _DEBUG || defined DEBUG
             const unsigned int numInSamples = in.getAudioFormat().samplesPerSecond;
@@ -244,7 +245,7 @@ namespace Audio {
         #else
             return size_t(double(outFormat.samplesPerSecond)    / double(in.getAudioFormat().bitsPerSample / 8 * in.getAudioFormat().channels) 
                         * double(outFormat.bitsPerBlock)        / double(outFormat.bitsPerSample / 8 * outFormat.channels)
-                        * double(in.byteSize()))
+                        * double(in.byteSize()));
         #endif
     }
 

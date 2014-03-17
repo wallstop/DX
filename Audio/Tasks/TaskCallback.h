@@ -17,53 +17,25 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110 - 1301  USA
 */ /////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "WFABF.h"
-#include "../AudioPacket.h"
+#pragma once
 
-#pragma warning(push)
-#pragma warning(disable : 4244) // Get rid of the pesky "double to size_t" conversion warning
+#include <atomic>
 
 namespace DX {
 namespace Audio {
-
-    DECLARE_FILTER(WFABF)
-
-    WFABF::WFABF() : AbstractFilter(std::shared_ptr<WFABF>(this), FREQUENCY_TRANSFORM)
+    
+    class TaskCallback
     {
-    }
+    public:
+        TaskCallback(bool started = true);
+        virtual ~TaskCallback();
 
-    WFABF::~WFABF()
-    {
-    }
+        virtual void stopTask(bool stop = true) const;
+        virtual bool isTaskStopped() const;
 
-    bool WFABF::transformPacket(const AudioPacket& in, AudioPacket& out) const
-    {
-        // We were given empty buffers :(
-        if(in.byteSize() == 0 || out.byteSize() == 0)
-            return false;
-
-        const double ratio = double(in.getAudioFormat().samplesPerSecond) / double(out.getAudioFormat().samplesPerSecond);
-        if(ratio == 1.)
-        {
-            out.assign(in.data(), in.byteSize());
-            return true;
-        }
-
-        const size_t maxSamples = out.numSamples();
-
-        for(size_t i = 0; i < maxSamples; ++i)
-            out[i] = in.at(size_t(double(i) * ratio));
-
-        return true;
-    }
-
-    std::string WFABF::name() const
-    {
-        static const std::string name("wallstop's Fast and Bad Filter.");
-        return name;
-    }
+    private:
+        mutable std::atomic<bool> m_cancel;
+    };
 
 }
 }
-
-#pragma warning(pop)

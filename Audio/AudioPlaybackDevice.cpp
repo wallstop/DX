@@ -17,53 +17,52 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110 - 1301  USA
 */ /////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "WFABF.h"
-#include "../AudioPacket.h"
-
-#pragma warning(push)
-#pragma warning(disable : 4244) // Get rid of the pesky "double to size_t" conversion warning
+#include "AudioPlaybackDevice.h"
+#include "impl/AudioPlaybackDeviceImpl.h"
+#include "AudioPacket.h"
 
 namespace DX {
 namespace Audio {
 
-    DECLARE_FILTER(WFABF)
-
-    WFABF::WFABF() : AbstractFilter(std::shared_ptr<WFABF>(this), FREQUENCY_TRANSFORM)
+    AudioPlaybackDevice::AudioPlaybackDevice() : AbstractAudioDevice()
     {
     }
 
-    WFABF::~WFABF()
+    AudioPlaybackDevice::~AudioPlaybackDevice()
     {
     }
 
-    bool WFABF::transformPacket(const AudioPacket& in, AudioPacket& out) const
+    bool AudioPlaybackDevice::initialize()
     {
-        // We were given empty buffers :(
-        if(in.byteSize() == 0 || out.byteSize() == 0)
-            return false;
+        return (m_impl && m_impl->initialize());
+    }
 
-        const double ratio = double(in.getAudioFormat().samplesPerSecond) / double(out.getAudioFormat().samplesPerSecond);
-        if(ratio == 1.)
-        {
-            out.assign(in.data(), in.byteSize());
-            return true;
-        }
-
-        const size_t maxSamples = out.numSamples();
-
-        for(size_t i = 0; i < maxSamples; ++i)
-            out[i] = in.at(size_t(double(i) * ratio));
-
+    inline bool AudioPlaybackDevice::isPlaybackDevice() const
+    {
         return true;
     }
 
-    std::string WFABF::name() const
+    bool AudioPlaybackDevice::writeToBuffer(const AudioPacket& in, const AbstractFilter& filter)
     {
-        static const std::string name("wallstop's Fast and Bad Filter.");
-        return name;
+        return (m_impl && m_impl->writeToBuffer(in, filter));
+    }
+
+    bool AudioPlaybackDevice::writeToBuffer(AudioStream& in, const AbstractFilter& filter, TaskCallback* callback)
+    {
+        return (m_impl && m_impl->writeToBuffer(in, filter, callback));
+    }
+
+    AudioPacket AudioPlaybackDevice::readFromBuffer()
+    {
+        if(m_impl)
+            return m_impl->readFromBuffer();
+        return BAD_BUFFER;
+    }
+
+    bool AudioPlaybackDevice::readFromBuffer(AudioStream& out, TaskCallback* callback)
+    {
+        return (m_impl && m_impl->readFromBuffer(out, callback));
     }
 
 }
 }
-
-#pragma warning(pop)

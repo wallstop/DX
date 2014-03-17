@@ -19,24 +19,17 @@
 
 #pragma once
 
-#include "AbstractFilter.h"
+#if defined(WIN32) || defined(_WIN32)
 
-#include <vector>
+    #ifndef DXAUDIO_LIB
+        #define DXAUDIO_EXPORT __declspec(dllimport)
+    #else
+        #define DXAUDIO_EXPORT __declspec(dllexport)
+    #endif
 
-namespace std 
-{
-    template <typename T>
-    class shared_ptr;
-}
+#else
 
-namespace DX {
-namespace Audio {
-namespace FilterRepository {
+    #define DXAUDIO_EXPORT
 
-    DXAUDIO_EXPORT void registerFilter(std::shared_ptr<AbstractFilter> filter, FilterType type);
+#endif
 
-    DXAUDIO_EXPORT std::vector<std::shared_ptr<AbstractFilter>> getFiltersOfType(FilterType type);
-
-}
-}
-}

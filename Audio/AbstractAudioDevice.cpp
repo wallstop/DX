@@ -17,53 +17,63 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110 - 1301  USA
 */ /////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "WFABF.h"
-#include "../AudioPacket.h"
-
-#pragma warning(push)
-#pragma warning(disable : 4244) // Get rid of the pesky "double to size_t" conversion warning
+#include "AbstractAudioDevice.h"
+#include "impl/AbstractAudioDeviceImpl.h"
 
 namespace DX {
 namespace Audio {
 
-    DECLARE_FILTER(WFABF)
-
-    WFABF::WFABF() : AbstractFilter(std::shared_ptr<WFABF>(this), FREQUENCY_TRANSFORM)
+    AbstractAudioDevice::AbstractAudioDevice() : m_impl(nullptr)
     {
     }
 
-    WFABF::~WFABF()
+    AbstractAudioDevice::~AbstractAudioDevice()
     {
     }
 
-    bool WFABF::transformPacket(const AudioPacket& in, AudioPacket& out) const
+    bool AbstractAudioDevice::initialize()
     {
-        // We were given empty buffers :(
-        if(in.byteSize() == 0 || out.byteSize() == 0)
-            return false;
-
-        const double ratio = double(in.getAudioFormat().samplesPerSecond) / double(out.getAudioFormat().samplesPerSecond);
-        if(ratio == 1.)
-        {
-            out.assign(in.data(), in.byteSize());
-            return true;
-        }
-
-        const size_t maxSamples = out.numSamples();
-
-        for(size_t i = 0; i < maxSamples; ++i)
-            out[i] = in.at(size_t(double(i) * ratio));
-
-        return true;
+        return (m_impl && m_impl->initialize());
     }
 
-    std::string WFABF::name() const
+    bool AbstractAudioDevice::start()
     {
-        static const std::string name("wallstop's Fast and Bad Filter.");
-        return name;
+        return (m_impl && m_impl->start());
+    }
+
+    bool AbstractAudioDevice::stop()
+    {
+        return (m_impl && m_impl->stop());
+    }
+
+    inline bool AbstractAudioDevice::isCaptureDevice() const
+    {
+        return false;
+    }
+
+    inline bool AbstractAudioDevice::isPlaybackDevice() const
+    {
+        return false;
+    }
+
+    bool AbstractAudioDevice::isValid() const
+    {
+        return (m_impl && m_impl->isValid());
+    }
+
+    AudioFormat AbstractAudioDevice::getAudioFormat() const
+    {
+        if(m_impl)
+            return m_impl->getAudioFormat();
+        return AudioFormat();
+    }
+
+    std::string AbstractAudioDevice::id() const
+    {
+        if(m_impl)
+            return m_impl->id();
+        return std::string();
     }
 
 }
 }
-
-#pragma warning(pop)

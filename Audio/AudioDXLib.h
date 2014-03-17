@@ -19,24 +19,14 @@
 
 #pragma once
 
-#include "AbstractFilter.h"
+// All-in-one include header
 
-#include <vector>
-
-namespace std 
-{
-    template <typename T>
-    class shared_ptr;
-}
-
-namespace DX {
-namespace Audio {
-namespace FilterRepository {
-
-    DXAUDIO_EXPORT void registerFilter(std::shared_ptr<AbstractFilter> filter, FilterType type);
-
-    DXAUDIO_EXPORT std::vector<std::shared_ptr<AbstractFilter>> getFiltersOfType(FilterType type);
-
-}
-}
-}
+#include <AudioDX/AudioCaptureDevice.h>
+#include <AudioDX/AudioPlaybackDevice.h>
+#include <AudioDX/AudioDeviceManager.h>
+#include <AudioDX/AudioFormat.h>
+#include <AudioDX/AudioPacket.h>
+#include <AudioDX/Filters/AbstractFilter.h>
+#include <AudioDX/Tasks/AbstractAudioTask.h>
+#include <AudioDX/Tasks/TaskCallback.h>
+#include <AudioDX/AudioStream.h>

@@ -23,6 +23,12 @@
 
 #include <string>
 
+namespace std 
+{
+    template <typename T>
+    class shared_ptr;
+}
+
 namespace DX {
 namespace Audio {
 
@@ -39,7 +45,7 @@ namespace Audio {
 
     struct DXAUDIO_EXPORT AbstractFilter
     {
-        AbstractFilter(FilterType type);
+        AbstractFilter(std::shared_ptr<AbstractFilter> filter, FilterType type);
         virtual ~AbstractFilter() = 0;
 
         virtual bool            transformPacket(const AudioPacket& in, AudioPacket& out) const = 0;

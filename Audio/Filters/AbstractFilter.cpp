@@ -6,9 +6,9 @@
 namespace DX {
 namespace Audio {
     
-    AbstractFilter::AbstractFilter(FilterType type)
+    AbstractFilter::AbstractFilter(std::shared_ptr<AbstractFilter> filter, FilterType type)
     {
-        FilterRepository::registerFilter(*this, type);
+        FilterRepository::registerFilter(filter, type);
     }
 
     AbstractFilter::~AbstractFilter()

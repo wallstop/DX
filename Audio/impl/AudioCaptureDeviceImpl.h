@@ -17,53 +17,38 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110 - 1301  USA
 */ /////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "WFABF.h"
-#include "../AudioPacket.h"
+#pragma once
 
-#pragma warning(push)
-#pragma warning(disable : 4244) // Get rid of the pesky "double to size_t" conversion warning
+#include "AbstractAudioDeviceImpl.h"
 
 namespace DX {
 namespace Audio {
 
-    DECLARE_FILTER(WFABF)
+#ifdef WIN32
 
-    WFABF::WFABF() : AbstractFilter(std::shared_ptr<WFABF>(this), FREQUENCY_TRANSFORM)
+    class AudioPacket;
+
+    class AudioCaptureDeviceImpl : public AbstractAudioDeviceImpl
     {
-    }
+    public:
 
-    WFABF::~WFABF()
-    {
-    }
+        AudioCaptureDeviceImpl(IMMDevice *mmDevice = nullptr, 
+            IAudioCaptureClient* captureClient = nullptr);
+        virtual ~AudioCaptureDeviceImpl();
 
-    bool WFABF::transformPacket(const AudioPacket& in, AudioPacket& out) const
-    {
-        // We were given empty buffers :(
-        if(in.byteSize() == 0 || out.byteSize() == 0)
-            return false;
+        virtual bool    initialize();
 
-        const double ratio = double(in.getAudioFormat().samplesPerSecond) / double(out.getAudioFormat().samplesPerSecond);
-        if(ratio == 1.)
-        {
-            out.assign(in.data(), in.byteSize());
-            return true;
-        }
+        // TODO: Modify signature to provide error handling features
+        virtual AudioPacket readFromBuffer();
+        virtual bool        readFromBuffer(AudioStream& out, TaskCallback* callback);
+        virtual bool        writeToBuffer(const AudioPacket& in, const AbstractFilter& filter);
+        virtual bool        writeToBuffer(AudioStream& in, const AbstractFilter& filter, TaskCallback* callback);
 
-        const size_t maxSamples = out.numSamples();
+    protected:
+        IAudioCaptureClient *m_captureClient;
+    };
 
-        for(size_t i = 0; i < maxSamples; ++i)
-            out[i] = in.at(size_t(double(i) * ratio));
-
-        return true;
-    }
-
-    std::string WFABF::name() const
-    {
-        static const std::string name("wallstop's Fast and Bad Filter.");
-        return name;
-    }
+#endif
 
 }
 }
-
-#pragma warning(pop)

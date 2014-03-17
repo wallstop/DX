@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="API">
+      <UniqueIdentifier>{8b440085-5262-4a54-9182-7b74b76232c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Filters">
+      <UniqueIdentifier>{2a1bbf0f-2fbb-4ce0-8cca-4d1156f63164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tasks">
+      <UniqueIdentifier>{f45d5f45-8275-4a46-9571-24a0170766fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="impl">
+      <UniqueIdentifier>{fcfb6b96-55f6-4a7b-b2cd-6d8d20c6cee0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\AudioFormat.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AudioPacket.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AudioStream.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Filters\AbstractFilter.cpp">
+      <Filter>Filters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Tasks\TaskCallback.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Filters\FilterRepository.cpp">
+      <Filter>Filters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Filters\WFABF.cpp">
+      <Filter>Filters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AbstractAudioDevice.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AudioCaptureDevice.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AudioDeviceManager.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AudioPlaybackDevice.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\impl\AbstractAudioDeviceImpl.cpp">
+      <Filter>impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\impl\AudioCaptureDeviceImpl.cpp">
+      <Filter>impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\impl\AudioDeviceManagerImpl.cpp">
+      <Filter>impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\impl\AudioPlaybackDeviceImpl.cpp">
+      <Filter>impl</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\AudioFormat.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AudioPacket.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AudioStream.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Filters\AbstractFilter.h">
+      <Filter>Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Tasks\AbstractAudioTask.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Tasks\TaskCallback.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DXAudioExport.h" />
+    <ClInclude Include="..\Filters\FilterRepository.h">
+      <Filter>Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Filters\WFABF.h">
+      <Filter>Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AbstractAudioDevice.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AudioCaptureDevice.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AudioDeviceManager.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AudioDXLib.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AudioPlaybackDevice.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\impl\AbstractAudioDeviceImpl.h">
+      <Filter>impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\impl\AudioCaptureDeviceImpl.h">
+      <Filter>impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\impl\AudioDeviceManagerImpl.h">
+      <Filter>impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\impl\AudioPlaybackDeviceImpl.h">
+      <Filter>impl</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

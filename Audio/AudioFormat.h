@@ -67,5 +67,10 @@ namespace Audio {
         bool operator!=(const AudioFormat& other) const;
     };
 
+    /*! A default-created AudioFormat is inherintly "bad". This is also useful for compile-time sanity
+        checks    
+    */
+    static AudioFormat BAD_FORMAT;
+
 }
 }

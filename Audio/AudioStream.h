@@ -17,26 +17,22 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110 - 1301  USA
 */ /////////////////////////////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// AudioStream is a single reader, single writer concurrent queue used to stream audio packets
+// from an AudioCaptureDevice to an AudioPlaybackDevice
+// Author: Eli Pinkerton
+// Date: 2/26/14
+////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma once
 
-#include "AbstractFilter.h"
-
-#include <vector>
-
-namespace std 
-{
-    template <typename T>
-    class shared_ptr;
-}
+#include <LockFree/Containers/ConcurrentStream.h>
+#include "AudioPacket.h"
 
 namespace DX {
 namespace Audio {
-namespace FilterRepository {
 
-    DXAUDIO_EXPORT void registerFilter(std::shared_ptr<AbstractFilter> filter, FilterType type);
+    typedef DX::LockFree::ConcurrentStream<AudioPacket> AudioStream ;
 
-    DXAUDIO_EXPORT std::vector<std::shared_ptr<AbstractFilter>> getFiltersOfType(FilterType type);
-
-}
 }
 }

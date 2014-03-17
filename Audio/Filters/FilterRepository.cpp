@@ -20,21 +20,22 @@
 #include "FilterRepository.h"
 
 #include <map>
+#include <memory>
 
 namespace DX {
 namespace Audio {
 namespace FilterRepository {
 
-    static std::map<AbstractFilter, FilterType> FilterRepo;
+    static std::map<std::shared_ptr<AbstractFilter>, FilterType> FilterRepo;
 
-    void registerFilter(const AbstractFilter& filter, FilterType type)
+    void registerFilter(std::shared_ptr<AbstractFilter> filter, FilterType type)
     {
         FilterRepo[filter] = type;
     }
 
-    std::vector<AbstractFilter> getFiltersOfType(FilterType type)
+    std::vector<std::shared_ptr<AbstractFilter>> getFiltersOfType(FilterType type)
     {
-        std::vector<AbstractFilter> ret;
+        std::vector<std::shared_ptr<AbstractFilter>> ret;
         for(const auto& filterPair : FilterRepo)
         {
             if(filterPair.second == type)
