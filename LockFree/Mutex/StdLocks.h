@@ -46,6 +46,13 @@ namespace LockFree {
         ~StdLock();
     private:
         std::mutex* m_mutex;
+
+        /*
+            Copy and move constructors are hidden to prevent the compiler from automatically generating
+            them for us. This class is currently NOT copyable or movable.
+        */
+        StdLock(const StdLock&);
+        StdLock(StdLock&&);
     };
 
 }

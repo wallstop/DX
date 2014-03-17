@@ -160,6 +160,10 @@ namespace LockFree {
         bool isWriter;
         const SpinRWMutex* m_lock;
 
+        /*
+            Copy and move constructors are hidden to prevent the compiler from automatically generating
+            them for us. This class is currently NOT copyable or movable.
+        */
         SpinRWLock(const SpinRWLock&);
         SpinRWLock(SpinRWLock&&);
     };

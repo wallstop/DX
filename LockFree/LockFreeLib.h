@@ -26,7 +26,7 @@
 #pragma once
 
 #include "CacheLine.h"
-#include "Mutex/Barrier.h"
+#include "Mutex/AbstractBarrier.h"
 #include "Mutex/CyclicSpinBarrier.h"
 #include "Mutex/Mutex.h"
 #include "Mutex/SpinBarrier.h"
