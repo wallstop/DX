@@ -1,0 +1,283 @@
+\hypertarget{class_d_x_1_1_audio_1_1_audio_packet}{\section{D\-X\-:\-:Audio\-:\-:Audio\-Packet Class Reference}
+\label{class_d_x_1_1_audio_1_1_audio_packet}\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+}
+
+
+\hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} is designed to hold a chunk of Audio\-Samples for hardware waveform I\-O. The simplest way of thinking about the class is as an array of \hyperlink{class_d_x_1_1_audio_1_1_audio_sample}{Audio\-Sample}. Audio\-Packets manage their own memory and have many useful functions, such as raw data access as well as array-\/like access.  
+
+
+
+
+{\ttfamily \#include $<$Audio\-Packet.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_d_x_1_1_audio_1_1_audio_packet_a1086b8c3a23adbddf3dfa5706f0f7b04}{Audio\-Packet} (size\-\_\-t size=D\-E\-F\-A\-U\-L\-T\-\_\-\-P\-A\-C\-K\-E\-T\-\_\-\-S\-I\-Z\-E)
+\begin{DoxyCompactList}\small\item\em Constructs an \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} with D\-E\-F\-A\-U\-L\-T\-\_\-\-P\-A\-C\-K\-E\-T\-\_\-\-S\-I\-Z\-E number of Audio\-Bytes. \end{DoxyCompactList}\item 
+\hyperlink{class_d_x_1_1_audio_1_1_audio_packet_a14c8e9755e1ac8bb386c1a8a62dd6058}{Audio\-Packet} (const \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} \&format, size\-\_\-t size=D\-E\-F\-A\-U\-L\-T\-\_\-\-P\-A\-C\-K\-E\-T\-\_\-\-S\-I\-Z\-E)
+\begin{DoxyCompactList}\small\item\em Constructs an \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} based off of a given \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} and a size representing the number of bytes that the \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} should hold. \end{DoxyCompactList}\item 
+\hyperlink{class_d_x_1_1_audio_1_1_audio_packet_a31534a4d2d2e8e10f95bf256055418f6}{Audio\-Packet} (const \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} \&copy)
+\item 
+\hyperlink{class_d_x_1_1_audio_1_1_audio_packet_ac0554258f103fc1f9a21fdf90d6405fb}{Audio\-Packet} (\hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} \&\&move)
+\item 
+\hyperlink{class_d_x_1_1_audio_1_1_audio_packet_a0ef397ec1f3cbc296a5e06ffe9051f60}{$\sim$\-Audio\-Packet} ()
+\item 
+\hyperlink{class_d_x_1_1_audio_1_1_audio_sample}{Audio\-Sample} \hyperlink{class_d_x_1_1_audio_1_1_audio_packet_aaedb59240e8d6b8f77266fcd23ed9ab1}{operator\mbox{[}$\,$\mbox{]}} (size\-\_\-t index)
+\item 
+const \hyperlink{class_d_x_1_1_audio_1_1_audio_sample}{Audio\-Sample} \hyperlink{class_d_x_1_1_audio_1_1_audio_packet_a279dcbea3ad12838ceb819ab9639362e}{at} (size\-\_\-t index) const 
+\item 
+\hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} \& \hyperlink{class_d_x_1_1_audio_1_1_audio_packet_a8fe0f4f40e27254a64999186199533b6}{operator=} (\hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} \&\&move)
+\item 
+\hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} \& \hyperlink{class_d_x_1_1_audio_1_1_audio_packet_a9a18c4601eff6961aeeccfa799a11575}{operator=} (const \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} \&copy)
+\item 
+\hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} \hyperlink{class_d_x_1_1_audio_1_1_audio_packet_a6f47aa2be747ce054c5c68d723fbf64b}{get\-Audio\-Format} () const 
+\item 
+void \hyperlink{class_d_x_1_1_audio_1_1_audio_packet_a6d3120521532e6cd050b517ebed8f263}{set\-Audio\-Format} (const \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} \&)
+\item 
+size\-\_\-t \hyperlink{class_d_x_1_1_audio_1_1_audio_packet_a21f03d6b228c4ef5f3a85109b5e537a5}{byte\-Size} () const 
+\item 
+size\-\_\-t \hyperlink{class_d_x_1_1_audio_1_1_audio_packet_aa3e1275d86a76f1d42d4d5a4b6213e5f}{max\-Size} () const 
+\item 
+size\-\_\-t \hyperlink{class_d_x_1_1_audio_1_1_audio_packet_a2f98b04776946df7c3ccb4a0e5b80ce4}{num\-Samples} () const 
+\item 
+bool \hyperlink{class_d_x_1_1_audio_1_1_audio_packet_a75854e87ae3c4ce04503a75d42219ca5}{is\-Valid} () const 
+\item 
+Audio\-Byte $\ast$ \hyperlink{class_d_x_1_1_audio_1_1_audio_packet_ab93eafc041e06976f99fad9d21cc19e3}{data} ()
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the raw data held by the \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}. \end{DoxyCompactList}\item 
+const Audio\-Byte $\ast$ \hyperlink{class_d_x_1_1_audio_1_1_audio_packet_a24b0feecae93675256e4edb05cebe3fe}{data} () const 
+\begin{DoxyCompactList}\small\item\em Returns a read-\/only pointer to the raw data held by the \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}. \end{DoxyCompactList}\item 
+void \hyperlink{class_d_x_1_1_audio_1_1_audio_packet_ad9686c0ca56c4da211514a8eadea8e5f}{assign} (const void $\ast$\hyperlink{class_d_x_1_1_audio_1_1_audio_packet_ab93eafc041e06976f99fad9d21cc19e3}{data}, size\-\_\-t num\-Bytes, size\-\_\-t offset=0)
+\begin{DoxyCompactList}\small\item\em Assigns a chunk of memory to some location specified by off\-Set in the \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}. \end{DoxyCompactList}\item 
+void \hyperlink{class_d_x_1_1_audio_1_1_audio_packet_a0eef764bb6bf13de390740b1e35f04da}{assign} (std\-::unique\-\_\-ptr$<$ Audio\-Byte\mbox{[}$\,$\mbox{]}$>$ \&\&\hyperlink{class_d_x_1_1_audio_1_1_audio_packet_ab93eafc041e06976f99fad9d21cc19e3}{data})
+\begin{DoxyCompactList}\small\item\em Moves a unique\-\_\-pointer representing some valid memory containing Audio\-Bytes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} is designed to hold a chunk of Audio\-Samples for hardware waveform I\-O. The simplest way of thinking about the class is as an array of \hyperlink{class_d_x_1_1_audio_1_1_audio_sample}{Audio\-Sample}. Audio\-Packets manage their own memory and have many useful functions, such as raw data access as well as array-\/like access. 
+
+\begin{DoxyNote}{Note}
+operator\mbox{[}\mbox{]} and \hyperlink{class_d_x_1_1_audio_1_1_audio_packet_a279dcbea3ad12838ceb819ab9639362e}{at()} both return Audio\-Samples as opposed to pure Audio\-Bytes. This is for ease of Audio\-Filter / D\-S\-P creation 
+\end{DoxyNote}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_d_x_1_1_audio_1_1_audio_packet_a1086b8c3a23adbddf3dfa5706f0f7b04}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!Audio\-Packet@{Audio\-Packet}}
+\index{Audio\-Packet@{Audio\-Packet}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{Audio\-Packet}]{\setlength{\rightskip}{0pt plus 5cm}D\-X\-::\-Audio\-::\-Audio\-Packet\-::\-Audio\-Packet (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{size = {\ttfamily DEFAULT\-\_\-PACKET\-\_\-SIZE}}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_audio_1_1_audio_packet_a1086b8c3a23adbddf3dfa5706f0f7b04}
+
+
+Constructs an \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} with D\-E\-F\-A\-U\-L\-T\-\_\-\-P\-A\-C\-K\-E\-T\-\_\-\-S\-I\-Z\-E number of Audio\-Bytes. 
+
+\begin{DoxyNote}{Note}
+The initial \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} for an \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} constructed this way will be invalid 
+
+No memory will be allocated if a size of 0 is provided 
+\end{DoxyNote}
+\hypertarget{class_d_x_1_1_audio_1_1_audio_packet_a14c8e9755e1ac8bb386c1a8a62dd6058}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!Audio\-Packet@{Audio\-Packet}}
+\index{Audio\-Packet@{Audio\-Packet}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{Audio\-Packet}]{\setlength{\rightskip}{0pt plus 5cm}D\-X\-::\-Audio\-::\-Audio\-Packet\-::\-Audio\-Packet (
+\begin{DoxyParamCaption}
+\item[{const {\bf Audio\-Format} \&}]{format, }
+\item[{size\-\_\-t}]{size = {\ttfamily DEFAULT\-\_\-PACKET\-\_\-SIZE}}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_audio_1_1_audio_packet_a14c8e9755e1ac8bb386c1a8a62dd6058}
+
+
+Constructs an \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} based off of a given \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} and a size representing the number of bytes that the \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} should hold. 
+
+This is the preferred method of creating an \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}. When typically creating an \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}, both the \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} and byte amount should be readily available.
+
+\begin{DoxyNote}{Note}
+The size represents the number of Audio\-Bytes, not Audio\-Samples 
+\end{DoxyNote}
+\hypertarget{class_d_x_1_1_audio_1_1_audio_packet_a31534a4d2d2e8e10f95bf256055418f6}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!Audio\-Packet@{Audio\-Packet}}
+\index{Audio\-Packet@{Audio\-Packet}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{Audio\-Packet}]{\setlength{\rightskip}{0pt plus 5cm}D\-X\-::\-Audio\-::\-Audio\-Packet\-::\-Audio\-Packet (
+\begin{DoxyParamCaption}
+\item[{const {\bf Audio\-Packet} \&}]{copy}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_audio_1_1_audio_packet_a31534a4d2d2e8e10f95bf256055418f6}
+Performs a deep copy on another \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} \hypertarget{class_d_x_1_1_audio_1_1_audio_packet_ac0554258f103fc1f9a21fdf90d6405fb}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!Audio\-Packet@{Audio\-Packet}}
+\index{Audio\-Packet@{Audio\-Packet}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{Audio\-Packet}]{\setlength{\rightskip}{0pt plus 5cm}D\-X\-::\-Audio\-::\-Audio\-Packet\-::\-Audio\-Packet (
+\begin{DoxyParamCaption}
+\item[{{\bf Audio\-Packet} \&\&}]{move}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_audio_1_1_audio_packet_ac0554258f103fc1f9a21fdf90d6405fb}
+Transfers ownership of \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} resources \hypertarget{class_d_x_1_1_audio_1_1_audio_packet_a0ef397ec1f3cbc296a5e06ffe9051f60}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!$\sim$\-Audio\-Packet@{$\sim$\-Audio\-Packet}}
+\index{$\sim$\-Audio\-Packet@{$\sim$\-Audio\-Packet}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{$\sim$\-Audio\-Packet}]{\setlength{\rightskip}{0pt plus 5cm}D\-X\-::\-Audio\-::\-Audio\-Packet\-::$\sim$\-Audio\-Packet (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_audio_1_1_audio_packet_a0ef397ec1f3cbc296a5e06ffe9051f60}
+Fully destroys all resources held by the \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_d_x_1_1_audio_1_1_audio_packet_ad9686c0ca56c4da211514a8eadea8e5f}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!assign@{assign}}
+\index{assign@{assign}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{assign}]{\setlength{\rightskip}{0pt plus 5cm}void D\-X\-::\-Audio\-::\-Audio\-Packet\-::assign (
+\begin{DoxyParamCaption}
+\item[{const void $\ast$}]{data, }
+\item[{size\-\_\-t}]{num\-Bytes, }
+\item[{size\-\_\-t}]{offset = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_audio_1_1_audio_packet_ad9686c0ca56c4da211514a8eadea8e5f}
+
+
+Assigns a chunk of memory to some location specified by off\-Set in the \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em data} & A pointer to the data to read from \\
+\hline
+\mbox{\tt in}  & {\em num\-Bytes} & The number of bytes to copy \\
+\hline
+\mbox{\tt in}  & {\em offset} & The byte offset in the \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}'s internal memory to copy to\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This method should be used incredibly sparingly, if at all. This method is largely for internal use only. 
+\end{DoxyNote}
+\hypertarget{class_d_x_1_1_audio_1_1_audio_packet_a0eef764bb6bf13de390740b1e35f04da}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!assign@{assign}}
+\index{assign@{assign}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{assign}]{\setlength{\rightskip}{0pt plus 5cm}void D\-X\-::\-Audio\-::\-Audio\-Packet\-::assign (
+\begin{DoxyParamCaption}
+\item[{std\-::unique\-\_\-ptr$<$ Audio\-Byte\mbox{[}$\,$\mbox{]}$>$ \&\&}]{data}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_audio_1_1_audio_packet_a0eef764bb6bf13de390740b1e35f04da}
+
+
+Moves a unique\-\_\-pointer representing some valid memory containing Audio\-Bytes. 
+
+\begin{DoxyNote}{Note}
+This method should be used incredibly sparingly, if at all. This method is largely for internal use only.
+
+This method W\-I\-L\-L O\-N\-L\-Y U\-P\-D\-A\-T\-E T\-H\-E I\-N\-T\-E\-R\-N\-A\-L M\-E\-M\-O\-R\-Y P\-O\-I\-N\-T\-E\-R. If this method is provided a unique\-\_\-ptr that doesn't match up exactly to the size and max\-Size values of this \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} the \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}'s integrity will be incredbily compromised. 
+\end{DoxyNote}
+\hypertarget{class_d_x_1_1_audio_1_1_audio_packet_a279dcbea3ad12838ceb819ab9639362e}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!at@{at}}
+\index{at@{at}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{at}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Audio\-Sample} D\-X\-::\-Audio\-::\-Audio\-Packet\-::at (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index}
+\end{DoxyParamCaption}
+) const}}\label{class_d_x_1_1_audio_1_1_audio_packet_a279dcbea3ad12838ceb819ab9639362e}
+Same as operator\mbox{[}\mbox{]}, except allows for explicitly const access \hypertarget{class_d_x_1_1_audio_1_1_audio_packet_a21f03d6b228c4ef5f3a85109b5e537a5}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!byte\-Size@{byte\-Size}}
+\index{byte\-Size@{byte\-Size}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{byte\-Size}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t D\-X\-::\-Audio\-::\-Audio\-Packet\-::byte\-Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_d_x_1_1_audio_1_1_audio_packet_a21f03d6b228c4ef5f3a85109b5e537a5}
+\begin{DoxyReturn}{Returns}
+The current number of Audio\-Bytes that an \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} thinks are valid. 
+\end{DoxyReturn}
+\hypertarget{class_d_x_1_1_audio_1_1_audio_packet_ab93eafc041e06976f99fad9d21cc19e3}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!data@{data}}
+\index{data@{data}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{data}]{\setlength{\rightskip}{0pt plus 5cm}Audio\-Byte $\ast$ D\-X\-::\-Audio\-::\-Audio\-Packet\-::data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_audio_1_1_audio_packet_ab93eafc041e06976f99fad9d21cc19e3}
+
+
+Returns a pointer to the raw data held by the \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}. 
+
+\begin{DoxyNote}{Note}
+This should be used incredibly sparingly. This method is largely for internal use only. 
+\end{DoxyNote}
+\hypertarget{class_d_x_1_1_audio_1_1_audio_packet_a24b0feecae93675256e4edb05cebe3fe}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!data@{data}}
+\index{data@{data}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{data}]{\setlength{\rightskip}{0pt plus 5cm}const Audio\-Byte $\ast$ D\-X\-::\-Audio\-::\-Audio\-Packet\-::data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_d_x_1_1_audio_1_1_audio_packet_a24b0feecae93675256e4edb05cebe3fe}
+
+
+Returns a read-\/only pointer to the raw data held by the \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}. 
+
+\begin{DoxyNote}{Note}
+This should be used incredibly sparingly. This method is largely for internal use only. 
+\end{DoxyNote}
+\hypertarget{class_d_x_1_1_audio_1_1_audio_packet_a6f47aa2be747ce054c5c68d723fbf64b}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!get\-Audio\-Format@{get\-Audio\-Format}}
+\index{get\-Audio\-Format@{get\-Audio\-Format}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{get\-Audio\-Format}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Audio\-Format} D\-X\-::\-Audio\-::\-Audio\-Packet\-::get\-Audio\-Format (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_d_x_1_1_audio_1_1_audio_packet_a6f47aa2be747ce054c5c68d723fbf64b}
+Accessor for the \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}'s \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} \hypertarget{class_d_x_1_1_audio_1_1_audio_packet_a75854e87ae3c4ce04503a75d42219ca5}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!is\-Valid@{is\-Valid}}
+\index{is\-Valid@{is\-Valid}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{is\-Valid}]{\setlength{\rightskip}{0pt plus 5cm}bool D\-X\-::\-Audio\-::\-Audio\-Packet\-::is\-Valid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_d_x_1_1_audio_1_1_audio_packet_a75854e87ae3c4ce04503a75d42219ca5}
+\begin{DoxyReturn}{Returns}
+True if the \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} has a valid \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} attached to it A\-N\-D contains some number of Audio\-Bytes. False otherise 
+\end{DoxyReturn}
+\hypertarget{class_d_x_1_1_audio_1_1_audio_packet_aa3e1275d86a76f1d42d4d5a4b6213e5f}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!max\-Size@{max\-Size}}
+\index{max\-Size@{max\-Size}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{max\-Size}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t D\-X\-::\-Audio\-::\-Audio\-Packet\-::max\-Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_d_x_1_1_audio_1_1_audio_packet_aa3e1275d86a76f1d42d4d5a4b6213e5f}
+Audio\-Packets have the potential to be resized multiple times. While this should not be the case for performant applications, Audio\-Packets will not new memory if they do not have to. As such, there is the potential for the maximum number of Audio\-Bytes that an \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} has allocated to not be the same as the number of Audio\-Bytes that are valid.
+
+\begin{DoxyReturn}{Returns}
+The current number of Audio\-Bytes that an \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} can interact with before performing an allocation 
+\end{DoxyReturn}
+\hypertarget{class_d_x_1_1_audio_1_1_audio_packet_a2f98b04776946df7c3ccb4a0e5b80ce4}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!num\-Samples@{num\-Samples}}
+\index{num\-Samples@{num\-Samples}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{num\-Samples}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t D\-X\-::\-Audio\-::\-Audio\-Packet\-::num\-Samples (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_d_x_1_1_audio_1_1_audio_packet_a2f98b04776946df7c3ccb4a0e5b80ce4}
+\begin{DoxyReturn}{Returns}
+A best-\/guess estimate of the number of Audio\-Samples that this \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} currently contains.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Due to the nature of Audio\-Samples, this method should provide reliable data, assuming no hardware errors occured in the formation of the \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}. 
+\end{DoxyNote}
+\hypertarget{class_d_x_1_1_audio_1_1_audio_packet_a8fe0f4f40e27254a64999186199533b6}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!operator=@{operator=}}
+\index{operator=@{operator=}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Audio\-Packet} \& D\-X\-::\-Audio\-::\-Audio\-Packet\-::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf Audio\-Packet} \&\&}]{move}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_audio_1_1_audio_packet_a8fe0f4f40e27254a64999186199533b6}
+Transfers ownership of resources from some \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} to this one \hypertarget{class_d_x_1_1_audio_1_1_audio_packet_a9a18c4601eff6961aeeccfa799a11575}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!operator=@{operator=}}
+\index{operator=@{operator=}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Audio\-Packet} \& D\-X\-::\-Audio\-::\-Audio\-Packet\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Audio\-Packet} \&}]{copy}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_audio_1_1_audio_packet_a9a18c4601eff6961aeeccfa799a11575}
+Performs a deep copy of \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} resources \hypertarget{class_d_x_1_1_audio_1_1_audio_packet_aaedb59240e8d6b8f77266fcd23ed9ab1}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{operator[]}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Audio\-Sample} D\-X\-::\-Audio\-::\-Audio\-Packet\-::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_audio_1_1_audio_packet_aaedb59240e8d6b8f77266fcd23ed9ab1}
+Returns an \hyperlink{class_d_x_1_1_audio_1_1_audio_sample}{Audio\-Sample} that holds references to memory held by this \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}. Typically operator\mbox{[}\mbox{]} would return a T\&. However, no Audio\-Samples are held internally by an \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}, only Audio\-Byte. So, the returned \hyperlink{class_d_x_1_1_audio_1_1_audio_sample}{Audio\-Sample} acts as a nice reference adapter for a group of Audio\-Bytes \hypertarget{class_d_x_1_1_audio_1_1_audio_packet_a6d3120521532e6cd050b517ebed8f263}{\index{D\-X\-::\-Audio\-::\-Audio\-Packet@{D\-X\-::\-Audio\-::\-Audio\-Packet}!set\-Audio\-Format@{set\-Audio\-Format}}
+\index{set\-Audio\-Format@{set\-Audio\-Format}!DX::Audio::AudioPacket@{D\-X\-::\-Audio\-::\-Audio\-Packet}}
+\subsubsection[{set\-Audio\-Format}]{\setlength{\rightskip}{0pt plus 5cm}void D\-X\-::\-Audio\-::\-Audio\-Packet\-::set\-Audio\-Format (
+\begin{DoxyParamCaption}
+\item[{const {\bf Audio\-Format} \&}]{format}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_audio_1_1_audio_packet_a6d3120521532e6cd050b517ebed8f263}
+Mutator for the \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}'s \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Audio/Audio\-Packet.\-h\item 
+Audio/Audio\-Packet.\-cpp\end{DoxyCompactItemize}

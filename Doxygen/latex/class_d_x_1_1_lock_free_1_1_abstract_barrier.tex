@@ -1,0 +1,108 @@
+\hypertarget{class_d_x_1_1_lock_free_1_1_abstract_barrier}{\section{D\-X\-:\-:Lock\-Free\-:\-:Abstract\-Barrier Class Reference}
+\label{class_d_x_1_1_lock_free_1_1_abstract_barrier}\index{D\-X\-::\-Lock\-Free\-::\-Abstract\-Barrier@{D\-X\-::\-Lock\-Free\-::\-Abstract\-Barrier}}
+}
+
+
+An \hyperlink{class_d_x_1_1_lock_free_1_1_abstract_barrier}{Abstract\-Barrier} is designed for use between multiple threads, typically blocking unparallelelizable sections of code. Any class derived off of an Abstract Barrier will block threads of execution at calls to \hyperlink{class_d_x_1_1_lock_free_1_1_abstract_barrier_a9040adf7507467e5a653bdaf2fbd17a6}{wait()} until \hyperlink{class_d_x_1_1_lock_free_1_1_abstract_barrier_a9040adf7507467e5a653bdaf2fbd17a6}{wait()} has been called some number of times, where that amount is defined by the number supplied to the constructor.  
+
+
+
+
+{\ttfamily \#include $<$Abstract\-Barrier.\-h$>$}
+
+Inheritance diagram for D\-X\-:\-:Lock\-Free\-:\-:Abstract\-Barrier\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_d_x_1_1_lock_free_1_1_abstract_barrier}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_d_x_1_1_lock_free_1_1_abstract_barrier_a57ea820cef85c23cd631f56956ad667f}{Abstract\-Barrier} (size\-\_\-t num\-Threads)
+\item 
+virtual void \hyperlink{class_d_x_1_1_lock_free_1_1_abstract_barrier_a9040adf7507467e5a653bdaf2fbd17a6}{wait} () const =0
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_abstract_barrier_a17dd0c6e950114baf17495d62a00af5a}{volatile char {\bfseries pad\-\_\-0} \mbox{[}C\-A\-C\-H\-E\-\_\-\-L\-I\-N\-E\-\_\-\-S\-I\-Z\-E\mbox{]}}\label{class_d_x_1_1_lock_free_1_1_abstract_barrier_a17dd0c6e950114baf17495d62a00af5a}
+
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_abstract_barrier_a348b132862ba722bc278d07cd2d714c3}{std\-::atomic$<$ size\-\_\-t $>$ {\bfseries m\-\_\-count}}\label{class_d_x_1_1_lock_free_1_1_abstract_barrier_a348b132862ba722bc278d07cd2d714c3}
+
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_abstract_barrier_a3127ea3626fcce39c5534ec5e485fe13}{volatile char {\bfseries pad\-\_\-1} \mbox{[}C\-A\-C\-H\-E\-\_\-\-L\-I\-N\-E\-\_\-\-S\-I\-Z\-E-\/(sizeof(std\-::atomic$<$ size\-\_\-t $>$)\%C\-A\-C\-H\-E\-\_\-\-L\-I\-N\-E\-\_\-\-S\-I\-Z\-E)\mbox{]}}\label{class_d_x_1_1_lock_free_1_1_abstract_barrier_a3127ea3626fcce39c5534ec5e485fe13}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An \hyperlink{class_d_x_1_1_lock_free_1_1_abstract_barrier}{Abstract\-Barrier} is designed for use between multiple threads, typically blocking unparallelelizable sections of code. Any class derived off of an Abstract Barrier will block threads of execution at calls to \hyperlink{class_d_x_1_1_lock_free_1_1_abstract_barrier_a9040adf7507467e5a653bdaf2fbd17a6}{wait()} until \hyperlink{class_d_x_1_1_lock_free_1_1_abstract_barrier_a9040adf7507467e5a653bdaf2fbd17a6}{wait()} has been called some number of times, where that amount is defined by the number supplied to the constructor. 
+
+Behavior is undefined if the number of threads to wait on is 0 or 1.
+
+A contrived use case is for scatter and gather\-:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} processWork(\hyperlink{class_d_x_1_1_lock_free_1_1_abstract_barrier_a57ea820cef85c23cd631f56956ad667f}{AbstractBarrier}& barrier)
+\{
+    \textcolor{comment}{// Do some work}
+    barrier.wait();
+\}
+
+\textcolor{keywordtype}{void} scatter()
+\{
+    \textcolor{comment}{// + 1 here, because we want to block the main thread of execution as well}
+    \hyperlink{class_d_x_1_1_lock_free_1_1_abstract_barrier_a57ea820cef85c23cd631f56956ad667f}{AbstractBarrier} barrier(someNumberOfThreads );
+    \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < someNumberOfThreads; ++i)
+        std::thread(&processWork, barrier);
+
+    barrier.wait();
+    gather();
+\}
+
+\textcolor{keywordtype}{void} gather()
+\{
+    \textcolor{comment}{// Do some other stuff }
+
+    \textcolor{comment}{//Here, scatter() has ensured that gather will ONLY be called once all threads have}
+    \textcolor{comment}{//completed their work.}
+\}
+\end{DoxyCode}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_d_x_1_1_lock_free_1_1_abstract_barrier_a57ea820cef85c23cd631f56956ad667f}{\index{D\-X\-::\-Lock\-Free\-::\-Abstract\-Barrier@{D\-X\-::\-Lock\-Free\-::\-Abstract\-Barrier}!Abstract\-Barrier@{Abstract\-Barrier}}
+\index{Abstract\-Barrier@{Abstract\-Barrier}!DX::LockFree::AbstractBarrier@{D\-X\-::\-Lock\-Free\-::\-Abstract\-Barrier}}
+\subsubsection[{Abstract\-Barrier}]{\setlength{\rightskip}{0pt plus 5cm}D\-X\-::\-Lock\-Free\-::\-Abstract\-Barrier\-::\-Abstract\-Barrier (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{num\-Threads}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{class_d_x_1_1_lock_free_1_1_abstract_barrier_a57ea820cef85c23cd631f56956ad667f}
+Constructs an \hyperlink{class_d_x_1_1_lock_free_1_1_abstract_barrier}{Abstract\-Barrier} that is set up to wait on some number of threads 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em num\-Threads} & The number of threads that are expected to use this barrier \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_d_x_1_1_lock_free_1_1_abstract_barrier_a9040adf7507467e5a653bdaf2fbd17a6}{\index{D\-X\-::\-Lock\-Free\-::\-Abstract\-Barrier@{D\-X\-::\-Lock\-Free\-::\-Abstract\-Barrier}!wait@{wait}}
+\index{wait@{wait}!DX::LockFree::AbstractBarrier@{D\-X\-::\-Lock\-Free\-::\-Abstract\-Barrier}}
+\subsubsection[{wait}]{\setlength{\rightskip}{0pt plus 5cm}virtual void D\-X\-::\-Lock\-Free\-::\-Abstract\-Barrier\-::wait (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_d_x_1_1_lock_free_1_1_abstract_barrier_a9040adf7507467e5a653bdaf2fbd17a6}
+Blocks the current thread of execution until all other \hyperlink{class_d_x_1_1_lock_free_1_1_abstract_barrier_a9040adf7507467e5a653bdaf2fbd17a6}{wait()} calls have beem made 
+
+Implemented in \hyperlink{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier_af9b42b0455c7251bda38694a2df17d11}{D\-X\-::\-Lock\-Free\-::\-Cyclic\-Spin\-Barrier}, and \hyperlink{class_d_x_1_1_lock_free_1_1_spin_barrier_a869688c05d8edae270a0e549c36c163d}{D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Lock\-Free/\-Mutex/Abstract\-Barrier.\-h\item 
+Lock\-Free/\-Mutex/Abstract\-Barrier.\-cpp\end{DoxyCompactItemize}

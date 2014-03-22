@@ -1,0 +1,77 @@
+\hypertarget{class_d_x_1_1_lock_free_1_1_spin_yield_mutex}{\section{D\-X\-:\-:Lock\-Free\-:\-:Spin\-Yield\-Mutex Class Reference}
+\label{class_d_x_1_1_lock_free_1_1_spin_yield_mutex}\index{D\-X\-::\-Lock\-Free\-::\-Spin\-Yield\-Mutex@{D\-X\-::\-Lock\-Free\-::\-Spin\-Yield\-Mutex}}
+}
+Inheritance diagram for D\-X\-:\-:Lock\-Free\-:\-:Spin\-Yield\-Mutex\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_d_x_1_1_lock_free_1_1_spin_yield_mutex}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_d_x_1_1_lock_free_1_1_spin_yield_mutex_a3c0996c0b9aab82e247df61a3a9dd38d}{Spin\-Yield\-Mutex} (const size\-\_\-t max\-Yield\-Ticks=D\-E\-F\-A\-U\-L\-T\-\_\-\-Y\-I\-E\-L\-D\-\_\-\-T\-I\-C\-K\-S)
+\item 
+\hyperlink{class_d_x_1_1_lock_free_1_1_spin_yield_mutex_a12abee65fbb86f2d4e5caf136941be0e}{$\sim$\-Spin\-Yield\-Mutex} ()
+\item 
+void \hyperlink{class_d_x_1_1_lock_free_1_1_spin_yield_mutex_a4c505e87ee87dbaff9f872a0009fa942}{lock} () const 
+\item 
+bool \hyperlink{class_d_x_1_1_lock_free_1_1_spin_yield_mutex_a0d8fc55d539af89d8d8e04a61bb5e887}{try\-Lock} () const 
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_spin_yield_mutex_ad428d031840d4a7679ea101c05095b7c}{void \hyperlink{class_d_x_1_1_lock_free_1_1_spin_yield_mutex_ad428d031840d4a7679ea101c05095b7c}{unlock} () const }\label{class_d_x_1_1_lock_free_1_1_spin_yield_mutex_ad428d031840d4a7679ea101c05095b7c}
+
+\begin{DoxyCompactList}\small\item\em Unlocks the mutex. This call is non-\/blocking, because having it otherwise doesn't make any sense. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_d_x_1_1_lock_free_1_1_spin_yield_mutex_a3c0996c0b9aab82e247df61a3a9dd38d}{\index{D\-X\-::\-Lock\-Free\-::\-Spin\-Yield\-Mutex@{D\-X\-::\-Lock\-Free\-::\-Spin\-Yield\-Mutex}!Spin\-Yield\-Mutex@{Spin\-Yield\-Mutex}}
+\index{Spin\-Yield\-Mutex@{Spin\-Yield\-Mutex}!DX::LockFree::SpinYieldMutex@{D\-X\-::\-Lock\-Free\-::\-Spin\-Yield\-Mutex}}
+\subsubsection[{Spin\-Yield\-Mutex}]{\setlength{\rightskip}{0pt plus 5cm}D\-X\-::\-Lock\-Free\-::\-Spin\-Yield\-Mutex\-::\-Spin\-Yield\-Mutex (
+\begin{DoxyParamCaption}
+\item[{const size\-\_\-t}]{max\-Yield\-Ticks = {\ttfamily DEFAULT\-\_\-YIELD\-\_\-TICKS}}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_lock_free_1_1_spin_yield_mutex_a3c0996c0b9aab82e247df61a3a9dd38d}
+Default constructor 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em max\-Yield\-Ticks} & Number of spins until the mutex yields \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_d_x_1_1_lock_free_1_1_spin_yield_mutex_a12abee65fbb86f2d4e5caf136941be0e}{\index{D\-X\-::\-Lock\-Free\-::\-Spin\-Yield\-Mutex@{D\-X\-::\-Lock\-Free\-::\-Spin\-Yield\-Mutex}!$\sim$\-Spin\-Yield\-Mutex@{$\sim$\-Spin\-Yield\-Mutex}}
+\index{$\sim$\-Spin\-Yield\-Mutex@{$\sim$\-Spin\-Yield\-Mutex}!DX::LockFree::SpinYieldMutex@{D\-X\-::\-Lock\-Free\-::\-Spin\-Yield\-Mutex}}
+\subsubsection[{$\sim$\-Spin\-Yield\-Mutex}]{\setlength{\rightskip}{0pt plus 5cm}D\-X\-::\-Lock\-Free\-::\-Spin\-Yield\-Mutex\-::$\sim$\-Spin\-Yield\-Mutex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_lock_free_1_1_spin_yield_mutex_a12abee65fbb86f2d4e5caf136941be0e}
+Calls to \hyperlink{class_d_x_1_1_lock_free_1_1_spin_yield_mutex_a4c505e87ee87dbaff9f872a0009fa942}{lock()} will block until no other thread has ownership of the mutex. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_d_x_1_1_lock_free_1_1_spin_yield_mutex_a4c505e87ee87dbaff9f872a0009fa942}{\index{D\-X\-::\-Lock\-Free\-::\-Spin\-Yield\-Mutex@{D\-X\-::\-Lock\-Free\-::\-Spin\-Yield\-Mutex}!lock@{lock}}
+\index{lock@{lock}!DX::LockFree::SpinYieldMutex@{D\-X\-::\-Lock\-Free\-::\-Spin\-Yield\-Mutex}}
+\subsubsection[{lock}]{\setlength{\rightskip}{0pt plus 5cm}void D\-X\-::\-Lock\-Free\-::\-Spin\-Yield\-Mutex\-::lock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_d_x_1_1_lock_free_1_1_spin_yield_mutex_a4c505e87ee87dbaff9f872a0009fa942}
+Calls to \hyperlink{class_d_x_1_1_lock_free_1_1_spin_yield_mutex_a0d8fc55d539af89d8d8e04a61bb5e887}{try\-Lock()} will not block. Ownership of the mutex is attempted. 
+
+Reimplemented from \hyperlink{class_d_x_1_1_lock_free_1_1_spin_mutex_aafeea5a756257e1297c65c58608959f0}{D\-X\-::\-Lock\-Free\-::\-Spin\-Mutex}.
+
+\hypertarget{class_d_x_1_1_lock_free_1_1_spin_yield_mutex_a0d8fc55d539af89d8d8e04a61bb5e887}{\index{D\-X\-::\-Lock\-Free\-::\-Spin\-Yield\-Mutex@{D\-X\-::\-Lock\-Free\-::\-Spin\-Yield\-Mutex}!try\-Lock@{try\-Lock}}
+\index{try\-Lock@{try\-Lock}!DX::LockFree::SpinYieldMutex@{D\-X\-::\-Lock\-Free\-::\-Spin\-Yield\-Mutex}}
+\subsubsection[{try\-Lock}]{\setlength{\rightskip}{0pt plus 5cm}bool D\-X\-::\-Lock\-Free\-::\-Spin\-Yield\-Mutex\-::try\-Lock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_d_x_1_1_lock_free_1_1_spin_yield_mutex_a0d8fc55d539af89d8d8e04a61bb5e887}
+Non-\/blocking. Calls to \hyperlink{class_d_x_1_1_lock_free_1_1_spin_yield_mutex_ad428d031840d4a7679ea101c05095b7c}{unlock()} will relinquish ownership of the mutex. 
+
+Reimplemented from \hyperlink{class_d_x_1_1_lock_free_1_1_spin_mutex_aeb3f7133cb914cafd0f7f484e6a08584}{D\-X\-::\-Lock\-Free\-::\-Spin\-Mutex}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Lock\-Free/\-Mutex/Spin\-Yield\-Mutex.\-h\item 
+Lock\-Free/\-Mutex/Spin\-Yield\-Mutex.\-cpp\end{DoxyCompactItemize}

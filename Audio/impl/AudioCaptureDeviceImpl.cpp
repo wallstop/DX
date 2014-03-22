@@ -94,9 +94,7 @@ namespace Audio {
         }
 
         if(numFramesToRead == 0)
-        {
             return AudioPacket(m_audioFormat, 0);
-        }
 
         AudioByte* data = nullptr;        
         unsigned long returnFlags = 0;
@@ -147,9 +145,7 @@ namespace Audio {
             // See if there's any data we can get
             //d::this_thread::sleep_for(std::chrono::microseconds(m_referenceTime));
             unsigned int numFramesToRead = 0;
-            int ok =  0;
-            ok = m_captureClient->GetNextPacketSize(&numFramesToRead);
-            //int ok = m_captureClient->GetNextPacketSize(&numFramesToRead);
+            int ok = m_captureClient->GetNextPacketSize(&numFramesToRead);
             if(ok < 0)
             {
                 // Unable to get the next packet size... something went wrong

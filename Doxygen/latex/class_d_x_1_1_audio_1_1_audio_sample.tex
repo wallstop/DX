@@ -1,0 +1,96 @@
+\hypertarget{class_d_x_1_1_audio_1_1_audio_sample}{\section{D\-X\-:\-:Audio\-:\-:Audio\-Sample Class Reference}
+\label{class_d_x_1_1_audio_1_1_audio_sample}\index{D\-X\-::\-Audio\-::\-Audio\-Sample@{D\-X\-::\-Audio\-::\-Audio\-Sample}}
+}
+
+
+Audio\-Samples are byte packages of an individual sample of some audio waveform. The actual bitwise-\/makeup of any given sample is defined by an \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format}. Audio\-Samples should {\itshape N\-E\-V\-E\-R} be orphaned from an \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} -\/ they hold simple references to memory held by an \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}, and have undefined (bad!) behavior if kept around past the lifetime of their parent \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}.  
+
+
+
+
+{\ttfamily \#include $<$Audio\-Packet.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_d_x_1_1_audio_1_1_audio_sample_ae8eb2486b80e7c7718a752ff738e8865}{Audio\-Sample} ()
+\item 
+\hyperlink{class_d_x_1_1_audio_1_1_audio_sample_afda761bd77a5dd23c198ada0c2ded88e}{Audio\-Sample} (const \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} \&format, Audio\-Byte $\ast$memory)
+\item 
+\hyperlink{class_d_x_1_1_audio_1_1_audio_sample_add0befe561a61667d7dc33bb9f41d311}{Audio\-Sample} (const \hyperlink{class_d_x_1_1_audio_1_1_audio_sample}{Audio\-Sample} \&copy)
+\item 
+\hyperlink{class_d_x_1_1_audio_1_1_audio_sample_adce1429f7e4e4aca198a7915a009efb2}{Audio\-Sample} (\hyperlink{class_d_x_1_1_audio_1_1_audio_sample}{Audio\-Sample} \&\&move)
+\item 
+\hyperlink{class_d_x_1_1_audio_1_1_audio_sample_a43cffccb172cda275cc68b1d9c6cfdb9}{$\sim$\-Audio\-Sample} ()
+\item 
+\hyperlink{class_d_x_1_1_audio_1_1_audio_sample}{Audio\-Sample} \& \hyperlink{class_d_x_1_1_audio_1_1_audio_sample_a7e54bfe2076f4f8c0f78616e015636e0}{operator=} (const \hyperlink{class_d_x_1_1_audio_1_1_audio_sample}{Audio\-Sample} \&copy)
+\begin{DoxyCompactList}\small\item\em Copies the data that one sample points at to the \hyperlink{class_d_x_1_1_audio_1_1_audio_sample}{Audio\-Sample} defined by this. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Audio\-Samples are byte packages of an individual sample of some audio waveform. The actual bitwise-\/makeup of any given sample is defined by an \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format}. Audio\-Samples should {\itshape N\-E\-V\-E\-R} be orphaned from an \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} -\/ they hold simple references to memory held by an \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}, and have undefined (bad!) behavior if kept around past the lifetime of their parent \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet}. 
+
+Audio\-Samples, for most cases, should never be directly accessed. Their primary purpose is to provide a nice abstraction for Filters (D\-S\-Ps) converting waveforms 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_d_x_1_1_audio_1_1_audio_sample_ae8eb2486b80e7c7718a752ff738e8865}{\index{D\-X\-::\-Audio\-::\-Audio\-Sample@{D\-X\-::\-Audio\-::\-Audio\-Sample}!Audio\-Sample@{Audio\-Sample}}
+\index{Audio\-Sample@{Audio\-Sample}!DX::Audio::AudioSample@{D\-X\-::\-Audio\-::\-Audio\-Sample}}
+\subsubsection[{Audio\-Sample}]{\setlength{\rightskip}{0pt plus 5cm}D\-X\-::\-Audio\-::\-Audio\-Sample\-::\-Audio\-Sample (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_audio_1_1_audio_sample_ae8eb2486b80e7c7718a752ff738e8865}
+Default constructor, initializes empty \hyperlink{class_d_x_1_1_audio_1_1_audio_sample}{Audio\-Sample} \hypertarget{class_d_x_1_1_audio_1_1_audio_sample_afda761bd77a5dd23c198ada0c2ded88e}{\index{D\-X\-::\-Audio\-::\-Audio\-Sample@{D\-X\-::\-Audio\-::\-Audio\-Sample}!Audio\-Sample@{Audio\-Sample}}
+\index{Audio\-Sample@{Audio\-Sample}!DX::Audio::AudioSample@{D\-X\-::\-Audio\-::\-Audio\-Sample}}
+\subsubsection[{Audio\-Sample}]{\setlength{\rightskip}{0pt plus 5cm}D\-X\-::\-Audio\-::\-Audio\-Sample\-::\-Audio\-Sample (
+\begin{DoxyParamCaption}
+\item[{const {\bf Audio\-Format} \&}]{format, }
+\item[{Audio\-Byte $\ast$}]{memory}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_audio_1_1_audio_sample_afda761bd77a5dd23c198ada0c2ded88e}
+Given an \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} and a pointer to some memory, outlines a single sample starting at at that point \hypertarget{class_d_x_1_1_audio_1_1_audio_sample_add0befe561a61667d7dc33bb9f41d311}{\index{D\-X\-::\-Audio\-::\-Audio\-Sample@{D\-X\-::\-Audio\-::\-Audio\-Sample}!Audio\-Sample@{Audio\-Sample}}
+\index{Audio\-Sample@{Audio\-Sample}!DX::Audio::AudioSample@{D\-X\-::\-Audio\-::\-Audio\-Sample}}
+\subsubsection[{Audio\-Sample}]{\setlength{\rightskip}{0pt plus 5cm}D\-X\-::\-Audio\-::\-Audio\-Sample\-::\-Audio\-Sample (
+\begin{DoxyParamCaption}
+\item[{const {\bf Audio\-Sample} \&}]{copy}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_audio_1_1_audio_sample_add0befe561a61667d7dc33bb9f41d311}
+Copy constructor, performs a shallow copy \hypertarget{class_d_x_1_1_audio_1_1_audio_sample_adce1429f7e4e4aca198a7915a009efb2}{\index{D\-X\-::\-Audio\-::\-Audio\-Sample@{D\-X\-::\-Audio\-::\-Audio\-Sample}!Audio\-Sample@{Audio\-Sample}}
+\index{Audio\-Sample@{Audio\-Sample}!DX::Audio::AudioSample@{D\-X\-::\-Audio\-::\-Audio\-Sample}}
+\subsubsection[{Audio\-Sample}]{\setlength{\rightskip}{0pt plus 5cm}D\-X\-::\-Audio\-::\-Audio\-Sample\-::\-Audio\-Sample (
+\begin{DoxyParamCaption}
+\item[{{\bf Audio\-Sample} \&\&}]{move}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_audio_1_1_audio_sample_adce1429f7e4e4aca198a7915a009efb2}
+Move constructor, should not invalidate move's data \hypertarget{class_d_x_1_1_audio_1_1_audio_sample_a43cffccb172cda275cc68b1d9c6cfdb9}{\index{D\-X\-::\-Audio\-::\-Audio\-Sample@{D\-X\-::\-Audio\-::\-Audio\-Sample}!$\sim$\-Audio\-Sample@{$\sim$\-Audio\-Sample}}
+\index{$\sim$\-Audio\-Sample@{$\sim$\-Audio\-Sample}!DX::Audio::AudioSample@{D\-X\-::\-Audio\-::\-Audio\-Sample}}
+\subsubsection[{$\sim$\-Audio\-Sample}]{\setlength{\rightskip}{0pt plus 5cm}D\-X\-::\-Audio\-::\-Audio\-Sample\-::$\sim$\-Audio\-Sample (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_audio_1_1_audio_sample_a43cffccb172cda275cc68b1d9c6cfdb9}
+Does N\-O\-T clean up memory 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_d_x_1_1_audio_1_1_audio_sample_a7e54bfe2076f4f8c0f78616e015636e0}{\index{D\-X\-::\-Audio\-::\-Audio\-Sample@{D\-X\-::\-Audio\-::\-Audio\-Sample}!operator=@{operator=}}
+\index{operator=@{operator=}!DX::Audio::AudioSample@{D\-X\-::\-Audio\-::\-Audio\-Sample}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Audio\-Sample} \& D\-X\-::\-Audio\-::\-Audio\-Sample\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Audio\-Sample} \&}]{copy}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_audio_1_1_audio_sample_a7e54bfe2076f4f8c0f78616e015636e0}
+
+
+Copies the data that one sample points at to the \hyperlink{class_d_x_1_1_audio_1_1_audio_sample}{Audio\-Sample} defined by this. 
+
+\begin{DoxyNote}{Note}
+This is the only method that Audio\-Samples have that allows for memory modification. 
+
+This method D\-O\-E\-S N\-O\-T P\-E\-R\-F\-O\-R\-M A\-N\-Y T\-R\-A\-N\-S\-F\-O\-R\-M\-S. If the channels \& bits\-Per\-Sample of the corresponding Audio\-Samples do not align, then this will result in B\-A\-D D\-A\-T\-A 
+\end{DoxyNote}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Audio/Audio\-Packet.\-h\item 
+Audio/Audio\-Packet.\-cpp\end{DoxyCompactItemize}

@@ -1,0 +1,63 @@
+\hypertarget{struct_d_x_1_1_audio_1_1_audio_format}{\section{D\-X\-:\-:Audio\-:\-:Audio\-Format Struct Reference}
+\label{struct_d_x_1_1_audio_1_1_audio_format}\index{D\-X\-::\-Audio\-::\-Audio\-Format@{D\-X\-::\-Audio\-::\-Audio\-Format}}
+}
+
+
+\hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} is a lightweight tag structure designed to attach to things that need some kind of audio format information. This typically includes hardware audio devices, where the information is pulled from, Streams to and from devices, and Audio\-Packets themselves. Streams and Audio\-Packets especially can be passed around freely. Any given class accessing them may want to know the format or any additional information about the data contained, as otherwise, the data would be contextless and largely useless.  
+
+
+
+
+{\ttfamily \#include $<$Audio\-Format.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{struct_d_x_1_1_audio_1_1_audio_format_aba69717f1269cb30d2f81aea5d17dfc5}{bool {\bfseries operator==} (const \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} \&other) const }\label{struct_d_x_1_1_audio_1_1_audio_format_aba69717f1269cb30d2f81aea5d17dfc5}
+
+\item 
+\hypertarget{struct_d_x_1_1_audio_1_1_audio_format_a93e1ebaa455c04c246413c3217f12e91}{bool {\bfseries operator!=} (const \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} \&other) const }\label{struct_d_x_1_1_audio_1_1_audio_format_a93e1ebaa455c04c246413c3217f12e91}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned short \hyperlink{struct_d_x_1_1_audio_1_1_audio_format_a99e6f97c11da52c68bb1cedc98dfe341}{channels}
+\item 
+unsigned int \hyperlink{struct_d_x_1_1_audio_1_1_audio_format_ae38016a3233f056484d95808eb53f781}{samples\-Per\-Second}
+\item 
+unsigned short \hyperlink{struct_d_x_1_1_audio_1_1_audio_format_aa6e6a2856d9afcd3b450f25316557c7b}{bits\-Per\-Block}
+\item 
+unsigned int \hyperlink{struct_d_x_1_1_audio_1_1_audio_format_a2e624e38652b39d310149e7a2259a4ee}{bits\-Per\-Sample}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} is a lightweight tag structure designed to attach to things that need some kind of audio format information. This typically includes hardware audio devices, where the information is pulled from, Streams to and from devices, and Audio\-Packets themselves. Streams and Audio\-Packets especially can be passed around freely. Any given class accessing them may want to know the format or any additional information about the data contained, as otherwise, the data would be contextless and largely useless. 
+
+\begin{DoxyNote}{Note}
+This will be expanded upon to contain any further useful information as the need arises. (Specifically, regarding support for platforms other than W\-I\-N32)
+\end{DoxyNote}
+This class should be able to accurately describe all common audio formats as well as any potential custom formats that may or may not exist. Filters should have the capability to adapt to any possible sampling frequency, channel count, bit depth, and sample size. A \char`\"{}typical\char`\"{} \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} will feature something like\-: channels = 2 samples\-Per\-Second = 44100 bits\-Per\-Block = 8 bits\-Per\-Sample = 32
+
+For a 44.\-1 K\-Hz, 16-\/bit depth audio format 
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_d_x_1_1_audio_1_1_audio_format_aa6e6a2856d9afcd3b450f25316557c7b}{\index{D\-X\-::\-Audio\-::\-Audio\-Format@{D\-X\-::\-Audio\-::\-Audio\-Format}!bits\-Per\-Block@{bits\-Per\-Block}}
+\index{bits\-Per\-Block@{bits\-Per\-Block}!DX::Audio::AudioFormat@{D\-X\-::\-Audio\-::\-Audio\-Format}}
+\subsubsection[{bits\-Per\-Block}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short D\-X\-::\-Audio\-::\-Audio\-Format\-::bits\-Per\-Block}}\label{struct_d_x_1_1_audio_1_1_audio_format_aa6e6a2856d9afcd3b450f25316557c7b}
+Number of bits to align a single block to \hypertarget{struct_d_x_1_1_audio_1_1_audio_format_a2e624e38652b39d310149e7a2259a4ee}{\index{D\-X\-::\-Audio\-::\-Audio\-Format@{D\-X\-::\-Audio\-::\-Audio\-Format}!bits\-Per\-Sample@{bits\-Per\-Sample}}
+\index{bits\-Per\-Sample@{bits\-Per\-Sample}!DX::Audio::AudioFormat@{D\-X\-::\-Audio\-::\-Audio\-Format}}
+\subsubsection[{bits\-Per\-Sample}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int D\-X\-::\-Audio\-::\-Audio\-Format\-::bits\-Per\-Sample}}\label{struct_d_x_1_1_audio_1_1_audio_format_a2e624e38652b39d310149e7a2259a4ee}
+Number of bits per sample of mono data \hypertarget{struct_d_x_1_1_audio_1_1_audio_format_a99e6f97c11da52c68bb1cedc98dfe341}{\index{D\-X\-::\-Audio\-::\-Audio\-Format@{D\-X\-::\-Audio\-::\-Audio\-Format}!channels@{channels}}
+\index{channels@{channels}!DX::Audio::AudioFormat@{D\-X\-::\-Audio\-::\-Audio\-Format}}
+\subsubsection[{channels}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short D\-X\-::\-Audio\-::\-Audio\-Format\-::channels}}\label{struct_d_x_1_1_audio_1_1_audio_format_a99e6f97c11da52c68bb1cedc98dfe341}
+Number of channels that the \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} has data for \hypertarget{struct_d_x_1_1_audio_1_1_audio_format_ae38016a3233f056484d95808eb53f781}{\index{D\-X\-::\-Audio\-::\-Audio\-Format@{D\-X\-::\-Audio\-::\-Audio\-Format}!samples\-Per\-Second@{samples\-Per\-Second}}
+\index{samples\-Per\-Second@{samples\-Per\-Second}!DX::Audio::AudioFormat@{D\-X\-::\-Audio\-::\-Audio\-Format}}
+\subsubsection[{samples\-Per\-Second}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int D\-X\-::\-Audio\-::\-Audio\-Format\-::samples\-Per\-Second}}\label{struct_d_x_1_1_audio_1_1_audio_format_ae38016a3233f056484d95808eb53f781}
+Frequency of sound that the \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} represents 
+
+The documentation for this struct was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Audio/Audio\-Format.\-h\item 
+Audio/Audio\-Format.\-cpp\end{DoxyCompactItemize}

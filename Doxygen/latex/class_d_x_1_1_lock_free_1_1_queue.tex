@@ -1,0 +1,65 @@
+\hypertarget{class_d_x_1_1_lock_free_1_1_queue}{\section{D\-X\-:\-:Lock\-Free\-:\-:Queue$<$ T $>$ Class Template Reference}
+\label{class_d_x_1_1_lock_free_1_1_queue}\index{D\-X\-::\-Lock\-Free\-::\-Queue$<$ T $>$@{D\-X\-::\-Lock\-Free\-::\-Queue$<$ T $>$}}
+}
+Inheritance diagram for D\-X\-:\-:Lock\-Free\-:\-:Queue$<$ T $>$\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_d_x_1_1_lock_free_1_1_queue}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_queue_af66e7cba57d219d81608c24eb5e397d5}{virtual bool {\bfseries is\-Empty} () const }\label{class_d_x_1_1_lock_free_1_1_queue_af66e7cba57d219d81608c24eb5e397d5}
+
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_queue_ac28a6a1ff587e5005bd97d6c159533ed}{virtual size\-\_\-t {\bfseries size} () const }\label{class_d_x_1_1_lock_free_1_1_queue_ac28a6a1ff587e5005bd97d6c159533ed}
+
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_queue_a6e392d698cefc4b01ed27154a18524af}{virtual bool {\bfseries front} (T \&out) const =0}\label{class_d_x_1_1_lock_free_1_1_queue_a6e392d698cefc4b01ed27154a18524af}
+
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_queue_a10af88de439fbcd64e675907640533cd}{virtual bool {\bfseries pop} (T \&in)=0}\label{class_d_x_1_1_lock_free_1_1_queue_a10af88de439fbcd64e675907640533cd}
+
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_queue_aba6b10fa9f6d36fae16776ce7984009c}{virtual void {\bfseries push} (const T \&in)=0}\label{class_d_x_1_1_lock_free_1_1_queue_aba6b10fa9f6d36fae16776ce7984009c}
+
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_queue_adeb07374710138df3b5d28bddb8974ea}{virtual void {\bfseries push} (T \&\&in)=0}\label{class_d_x_1_1_lock_free_1_1_queue_adeb07374710138df3b5d28bddb8974ea}
+
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_queue_aedf62168879b92f0e269d2f1fba4c93a}{virtual void {\bfseries clear} ()=0}\label{class_d_x_1_1_lock_free_1_1_queue_aedf62168879b92f0e269d2f1fba4c93a}
+
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_queue_af83dc0f90f3534811f3057db384d58a8}{bool {\bfseries operator$>$$>$} (T \&)}\label{class_d_x_1_1_lock_free_1_1_queue_af83dc0f90f3534811f3057db384d58a8}
+
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_queue_ace553782c66d594008cc0e26f588f9cf}{\hyperlink{class_d_x_1_1_lock_free_1_1_queue}{Queue} \& {\bfseries operator$<$$<$} (const T \&)}\label{class_d_x_1_1_lock_free_1_1_queue_ace553782c66d594008cc0e26f588f9cf}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_queue_afd72533778860258f3cedb4a2a6b6a17}{\hyperlink{struct_d_x_1_1_lock_free_1_1_node}{Node}$<$ T $>$ $\ast$ {\bfseries m\-\_\-start}}\label{class_d_x_1_1_lock_free_1_1_queue_afd72533778860258f3cedb4a2a6b6a17}
+
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_queue_a69296c6b2dbdc10eca9ce91c5c5e8696}{volatile char {\bfseries pad\-\_\-0} \mbox{[}C\-A\-C\-H\-E\-\_\-\-L\-I\-N\-E\-\_\-\-S\-I\-Z\-E-\/(sizeof(\hyperlink{struct_d_x_1_1_lock_free_1_1_node}{Node}$<$ T $>$ $\ast$)\%C\-A\-C\-H\-E\-\_\-\-L\-I\-N\-E\-\_\-\-S\-I\-Z\-E)\mbox{]}}\label{class_d_x_1_1_lock_free_1_1_queue_a69296c6b2dbdc10eca9ce91c5c5e8696}
+
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_queue_a8e4a95ccaa9cdd92b29ee10ebd3dbe9d}{\hyperlink{struct_d_x_1_1_lock_free_1_1_node}{Node}$<$ T $>$ $\ast$ {\bfseries m\-\_\-end}}\label{class_d_x_1_1_lock_free_1_1_queue_a8e4a95ccaa9cdd92b29ee10ebd3dbe9d}
+
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_queue_a97abcd8082dd19a63ead25ef8697a92d}{volatile char {\bfseries pad\-\_\-1} \mbox{[}C\-A\-C\-H\-E\-\_\-\-L\-I\-N\-E\-\_\-\-S\-I\-Z\-E-\/(sizeof(\hyperlink{struct_d_x_1_1_lock_free_1_1_node}{Node}$<$ T $>$ $\ast$)\%C\-A\-C\-H\-E\-\_\-\-L\-I\-N\-E\-\_\-\-S\-I\-Z\-E)\mbox{]}}\label{class_d_x_1_1_lock_free_1_1_queue_a97abcd8082dd19a63ead25ef8697a92d}
+
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_queue_a1cf52809012fae94ab715590803ddcd2}{std\-::atomic$<$ size\-\_\-t $>$ {\bfseries m\-\_\-size}}\label{class_d_x_1_1_lock_free_1_1_queue_a1cf52809012fae94ab715590803ddcd2}
+
+\item 
+\hypertarget{class_d_x_1_1_lock_free_1_1_queue_ae736270ff54ecf46a650a2399551665a}{volatile char {\bfseries pad\-\_\-2} \mbox{[}C\-A\-C\-H\-E\-\_\-\-L\-I\-N\-E\-\_\-\-S\-I\-Z\-E-\/(sizeof(std\-::atomic$<$ size\-\_\-t $>$)\%C\-A\-C\-H\-E\-\_\-\-L\-I\-N\-E\-\_\-\-S\-I\-Z\-E)\mbox{]}}\label{class_d_x_1_1_lock_free_1_1_queue_ae736270ff54ecf46a650a2399551665a}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Lock\-Free/\-Containers/Abstract\-Queue.\-h\end{DoxyCompactItemize}

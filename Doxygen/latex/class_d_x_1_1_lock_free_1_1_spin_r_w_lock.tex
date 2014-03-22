@@ -1,0 +1,68 @@
+\hypertarget{class_d_x_1_1_lock_free_1_1_spin_r_w_lock}{\section{D\-X\-:\-:Lock\-Free\-:\-:Spin\-R\-W\-Lock Class Reference}
+\label{class_d_x_1_1_lock_free_1_1_spin_r_w_lock}\index{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Lock@{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Lock}}
+}
+
+
+\hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_lock}{Spin\-R\-W\-Lock} is the preferred way of interacting with a \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex}. \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_lock}{Spin\-R\-W\-Lock} is a lock-\/guard style class, locking the \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex} upon construction and releasing the lock upon destruction. \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex} remembers whether it is a reader or writer lock, and releases the same kind of lock that it was constructed with.  
+
+
+
+
+{\ttfamily \#include $<$Spin\-R\-W\-Mutex.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_lock_a079aadf792b936cee1e94e9f3870e1ba}{Spin\-R\-W\-Lock} (const \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex} \&mutex, bool is\-Writer)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_lock}{Spin\-R\-W\-Lock} is the preferred way of interacting with a \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex}. \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_lock}{Spin\-R\-W\-Lock} is a lock-\/guard style class, locking the \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex} upon construction and releasing the lock upon destruction. \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex} remembers whether it is a reader or writer lock, and releases the same kind of lock that it was constructed with. 
+
+The big advantage of using Spin\-R\-W\-Locks over \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex} is the automatic unlock on destruction\-: unlike the examples provided above, no copies have to be made on a get() call
+
+\begin{DoxyNote}{Note}
+Spin\-R\-W\-Locks do not allow for recursive writer-\/locks of a single \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex}
+\end{DoxyNote}
+
+\begin{DoxyCode}
+MyClass myClass;
+\textcolor{keyword}{mutable} SpinRWMutex myRWMutex;
+
+MyClass getMyClass()\textcolor{keyword}{ const}
+\textcolor{keyword}{}\{
+    \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_lock_a079aadf792b936cee1e94e9f3870e1ba}{SpinRWLock} \_lock(myRWMutex, \textcolor{keyword}{false});
+    \textcolor{keywordflow}{return} myClass; \textcolor{comment}{// No copies or thread-local storage necessary}
+\}
+
+\textcolor{keywordtype}{void} setMyClass(\textcolor{keyword}{const} MyClass& other)
+\{
+    \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_lock_a079aadf792b936cee1e94e9f3870e1ba}{SpinRWLock} \_lock(myRWMutex, \textcolor{keyword}{true});
+    myClass = other;
+\}
+\end{DoxyCode}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_d_x_1_1_lock_free_1_1_spin_r_w_lock_a079aadf792b936cee1e94e9f3870e1ba}{\index{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Lock@{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Lock}!Spin\-R\-W\-Lock@{Spin\-R\-W\-Lock}}
+\index{Spin\-R\-W\-Lock@{Spin\-R\-W\-Lock}!DX::LockFree::SpinRWLock@{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Lock}}
+\subsubsection[{Spin\-R\-W\-Lock}]{\setlength{\rightskip}{0pt plus 5cm}D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Lock\-::\-Spin\-R\-W\-Lock (
+\begin{DoxyParamCaption}
+\item[{const {\bf Spin\-R\-W\-Mutex} \&}]{mutex, }
+\item[{bool}]{is\-Writer}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_lock_free_1_1_spin_r_w_lock_a079aadf792b936cee1e94e9f3870e1ba}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mutex} & The \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex} that the lock should be locking/unlocking \\
+\hline
+\mbox{\tt in}  & {\em is\-Writer} & True indicates a writer lock, False indicates a reader lock \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Lock\-Free/\-Mutex/Spin\-R\-W\-Mutex.\-h\item 
+Lock\-Free/\-Mutex/Spin\-R\-W\-Mutex.\-cpp\end{DoxyCompactItemize}

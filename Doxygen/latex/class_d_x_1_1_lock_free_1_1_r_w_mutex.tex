@@ -1,0 +1,101 @@
+\hypertarget{class_d_x_1_1_lock_free_1_1_r_w_mutex}{\section{D\-X\-:\-:Lock\-Free\-:\-:R\-W\-Mutex Class Reference}
+\label{class_d_x_1_1_lock_free_1_1_r_w_mutex}\index{D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex@{D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex}}
+}
+
+
+\hyperlink{class_d_x_1_1_lock_free_1_1_r_w_mutex}{R\-W\-Mutex} is a general descriptor for a class of mutex-\/like objects that support multiple readers or a single writer. Unlike their \hyperlink{class_d_x_1_1_lock_free_1_1_mutex}{Mutex} counterparts, R\-W\-Mutexes have two different lock() and unlock() methods -\/ one set for writers and one set for readers.  
+
+
+
+
+{\ttfamily \#include $<$R\-W\-Mutex.\-h$>$}
+
+Inheritance diagram for D\-X\-:\-:Lock\-Free\-:\-:R\-W\-Mutex\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_d_x_1_1_lock_free_1_1_r_w_mutex}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_d_x_1_1_lock_free_1_1_r_w_mutex_a52009c1be555162b437e2c53eb3026c4}{lock\-Reader} () const =0
+\item 
+virtual void \hyperlink{class_d_x_1_1_lock_free_1_1_r_w_mutex_aaa10a03593e166b02c99455645b49800}{lock\-Writer} () const =0
+\item 
+virtual void \hyperlink{class_d_x_1_1_lock_free_1_1_r_w_mutex_a52ac4bfa7f6104ef271f468f2bb69eae}{unlock\-Reader} () const =0
+\item 
+virtual void \hyperlink{class_d_x_1_1_lock_free_1_1_r_w_mutex_af5d65dc65d6800b73d93b43cb7de559b}{unlock\-Writer} () const =0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_d_x_1_1_lock_free_1_1_r_w_mutex}{R\-W\-Mutex} is a general descriptor for a class of mutex-\/like objects that support multiple readers or a single writer. Unlike their \hyperlink{class_d_x_1_1_lock_free_1_1_mutex}{Mutex} counterparts, R\-W\-Mutexes have two different lock() and unlock() methods -\/ one set for writers and one set for readers. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_d_x_1_1_lock_free_1_1_r_w_mutex_a52009c1be555162b437e2c53eb3026c4}{\index{D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex@{D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex}!lock\-Reader@{lock\-Reader}}
+\index{lock\-Reader@{lock\-Reader}!DX::LockFree::RWMutex@{D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex}}
+\subsubsection[{lock\-Reader}]{\setlength{\rightskip}{0pt plus 5cm}virtual void D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex\-::lock\-Reader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_d_x_1_1_lock_free_1_1_r_w_mutex_a52009c1be555162b437e2c53eb3026c4}
+Locks this \hyperlink{class_d_x_1_1_lock_free_1_1_r_w_mutex}{R\-W\-Mutex} as a reader. Depending on the state of the object, this call may or may not block.
+
+\begin{DoxyNote}{Note}
+This call is gauranteed to not block if only readers have locks. Unspecified otherwise. 
+\end{DoxyNote}
+
+
+Implemented in \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex_a71e9aef3a5e51ca1f74b765e3b123261}{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex}.
+
+\hypertarget{class_d_x_1_1_lock_free_1_1_r_w_mutex_aaa10a03593e166b02c99455645b49800}{\index{D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex@{D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex}!lock\-Writer@{lock\-Writer}}
+\index{lock\-Writer@{lock\-Writer}!DX::LockFree::RWMutex@{D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex}}
+\subsubsection[{lock\-Writer}]{\setlength{\rightskip}{0pt plus 5cm}virtual void D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex\-::lock\-Writer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_d_x_1_1_lock_free_1_1_r_w_mutex_aaa10a03593e166b02c99455645b49800}
+Locks this \hyperlink{class_d_x_1_1_lock_free_1_1_r_w_mutex}{R\-W\-Mutex} as a writer. Depending on the state of the object, this call may or may not block.
+
+\begin{DoxyNote}{Note}
+This call is gauranteed not to block if there are no other readers or writers that have the \hyperlink{class_d_x_1_1_lock_free_1_1_r_w_mutex}{R\-W\-Mutex} locked. Unspecified otherwise. 
+\end{DoxyNote}
+
+
+Implemented in \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex_a183780cdd01f30fef36febe8e7a7f9b7}{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex}.
+
+\hypertarget{class_d_x_1_1_lock_free_1_1_r_w_mutex_a52ac4bfa7f6104ef271f468f2bb69eae}{\index{D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex@{D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex}!unlock\-Reader@{unlock\-Reader}}
+\index{unlock\-Reader@{unlock\-Reader}!DX::LockFree::RWMutex@{D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex}}
+\subsubsection[{unlock\-Reader}]{\setlength{\rightskip}{0pt plus 5cm}virtual void D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex\-::unlock\-Reader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_d_x_1_1_lock_free_1_1_r_w_mutex_a52ac4bfa7f6104ef271f468f2bb69eae}
+Releases a reader lock on the \hyperlink{class_d_x_1_1_lock_free_1_1_r_w_mutex}{R\-W\-Mutex}. This call does not block. \begin{DoxyNote}{Note}
+Assumes that this call has been properly paired with a call to \hyperlink{class_d_x_1_1_lock_free_1_1_r_w_mutex_a52009c1be555162b437e2c53eb3026c4}{lock\-Reader()} 
+\end{DoxyNote}
+
+
+Implemented in \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex_a64d2de6d900ba6eaeea1a0a76ac4ff5d}{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex}.
+
+\hypertarget{class_d_x_1_1_lock_free_1_1_r_w_mutex_af5d65dc65d6800b73d93b43cb7de559b}{\index{D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex@{D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex}!unlock\-Writer@{unlock\-Writer}}
+\index{unlock\-Writer@{unlock\-Writer}!DX::LockFree::RWMutex@{D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex}}
+\subsubsection[{unlock\-Writer}]{\setlength{\rightskip}{0pt plus 5cm}virtual void D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex\-::unlock\-Writer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_d_x_1_1_lock_free_1_1_r_w_mutex_af5d65dc65d6800b73d93b43cb7de559b}
+Releases a writerer lock on the \hyperlink{class_d_x_1_1_lock_free_1_1_r_w_mutex}{R\-W\-Mutex}. This call does not block. \begin{DoxyNote}{Note}
+Assumes that this call has been properly paired with a call to \hyperlink{class_d_x_1_1_lock_free_1_1_r_w_mutex_aaa10a03593e166b02c99455645b49800}{lock\-Writer()} 
+\end{DoxyNote}
+
+
+Implemented in \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex_af20a514e5cc56ac5fbf6ab7759fafe1c}{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Lock\-Free/\-Mutex/R\-W\-Mutex.\-h\item 
+Lock\-Free/\-Mutex/R\-W\-Mutex.\-cpp\end{DoxyCompactItemize}

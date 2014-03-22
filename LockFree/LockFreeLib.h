@@ -29,6 +29,7 @@
 #include "Mutex/AbstractBarrier.h"
 #include "Mutex/CyclicSpinBarrier.h"
 #include "Mutex/Mutex.h"
+#include "Mutex/RWMutex.h"
 #include "Mutex/SpinBarrier.h"
 #include "Mutex/SpinMutex.h"
 #include "Mutex/SpinRecursiveMutex.h"

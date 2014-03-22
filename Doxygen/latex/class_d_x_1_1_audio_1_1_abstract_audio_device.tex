@@ -1,0 +1,88 @@
+\hypertarget{class_d_x_1_1_audio_1_1_abstract_audio_device}{\section{D\-X\-:\-:Audio\-:\-:Abstract\-Audio\-Device Class Reference}
+\label{class_d_x_1_1_audio_1_1_abstract_audio_device}\index{D\-X\-::\-Audio\-::\-Abstract\-Audio\-Device@{D\-X\-::\-Audio\-::\-Abstract\-Audio\-Device}}
+}
+
+
+\hyperlink{class_d_x_1_1_audio_1_1_abstract_audio_device}{Abstract\-Audio\-Device} is the base class for any system-\/recognized hardware.  
+
+
+
+
+{\ttfamily \#include $<$Abstract\-Audio\-Device.\-h$>$}
+
+Inheritance diagram for D\-X\-:\-:Audio\-:\-:Abstract\-Audio\-Device\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_d_x_1_1_audio_1_1_abstract_audio_device}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_d_x_1_1_audio_1_1_abstract_audio_device_a7992aa69af2eb4fbee273e84e08e244b}{virtual bool {\bfseries initialize} ()=0}\label{class_d_x_1_1_audio_1_1_abstract_audio_device_a7992aa69af2eb4fbee273e84e08e244b}
+
+\item 
+\hypertarget{class_d_x_1_1_audio_1_1_abstract_audio_device_acac63db656c17373196be255750bfb4d}{virtual bool {\bfseries start} ()}\label{class_d_x_1_1_audio_1_1_abstract_audio_device_acac63db656c17373196be255750bfb4d}
+
+\item 
+\hypertarget{class_d_x_1_1_audio_1_1_abstract_audio_device_a1eb78fe6b16b4421f49e18e061d2d2ec}{virtual bool {\bfseries stop} ()}\label{class_d_x_1_1_audio_1_1_abstract_audio_device_a1eb78fe6b16b4421f49e18e061d2d2ec}
+
+\item 
+\hypertarget{class_d_x_1_1_audio_1_1_abstract_audio_device_aeee4fee106b42544b847e0a2c33af432}{virtual bool {\bfseries is\-Capture\-Device} () const }\label{class_d_x_1_1_audio_1_1_abstract_audio_device_aeee4fee106b42544b847e0a2c33af432}
+
+\item 
+\hypertarget{class_d_x_1_1_audio_1_1_abstract_audio_device_a630ff4626c9fa3dbea779425450a9f04}{virtual bool {\bfseries is\-Playback\-Device} () const }\label{class_d_x_1_1_audio_1_1_abstract_audio_device_a630ff4626c9fa3dbea779425450a9f04}
+
+\item 
+\hypertarget{class_d_x_1_1_audio_1_1_abstract_audio_device_ab5743c6b0c5412663f3ada8f87df8f9b}{virtual bool {\bfseries is\-Valid} () const }\label{class_d_x_1_1_audio_1_1_abstract_audio_device_ab5743c6b0c5412663f3ada8f87df8f9b}
+
+\item 
+\hypertarget{class_d_x_1_1_audio_1_1_abstract_audio_device_aeae655ba2f6613ca9a40248133c54ab3}{virtual \hyperlink{struct_d_x_1_1_audio_1_1_audio_format}{Audio\-Format} {\bfseries get\-Audio\-Format} () const }\label{class_d_x_1_1_audio_1_1_abstract_audio_device_aeae655ba2f6613ca9a40248133c54ab3}
+
+\item 
+\hypertarget{class_d_x_1_1_audio_1_1_abstract_audio_device_a9eb19e3e87d1ab53979784ce2744cc18}{virtual \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} {\bfseries read\-From\-Buffer} ()=0}\label{class_d_x_1_1_audio_1_1_abstract_audio_device_a9eb19e3e87d1ab53979784ce2744cc18}
+
+\item 
+\hypertarget{class_d_x_1_1_audio_1_1_abstract_audio_device_adde4b9a7286575f90258da492e0d8f9b}{virtual bool {\bfseries read\-From\-Buffer} (\hyperlink{class_d_x_1_1_lock_free_1_1_concurrent_stream}{Audio\-Stream} \&out, \hyperlink{class_d_x_1_1_audio_1_1_task_callback}{Task\-Callback} $\ast$callback)=0}\label{class_d_x_1_1_audio_1_1_abstract_audio_device_adde4b9a7286575f90258da492e0d8f9b}
+
+\item 
+\hypertarget{class_d_x_1_1_audio_1_1_abstract_audio_device_a08c33a0e97d3919024976b8e1ef19800}{virtual bool {\bfseries write\-To\-Buffer} (const \hyperlink{class_d_x_1_1_audio_1_1_audio_packet}{Audio\-Packet} \&in, const \hyperlink{struct_d_x_1_1_audio_1_1_abstract_filter}{Abstract\-Filter} \&filter)=0}\label{class_d_x_1_1_audio_1_1_abstract_audio_device_a08c33a0e97d3919024976b8e1ef19800}
+
+\item 
+\hypertarget{class_d_x_1_1_audio_1_1_abstract_audio_device_a0c79b32fdd2720a5bc759a6baa6edca3}{virtual bool {\bfseries write\-To\-Buffer} (\hyperlink{class_d_x_1_1_lock_free_1_1_concurrent_stream}{Audio\-Stream} \&in, const \hyperlink{struct_d_x_1_1_audio_1_1_abstract_filter}{Abstract\-Filter} \&filter, \hyperlink{class_d_x_1_1_audio_1_1_task_callback}{Task\-Callback} $\ast$callback=nullptr)=0}\label{class_d_x_1_1_audio_1_1_abstract_audio_device_a0c79b32fdd2720a5bc759a6baa6edca3}
+
+\item 
+\hypertarget{class_d_x_1_1_audio_1_1_abstract_audio_device_a300d1e3c5fcdf11dc99c82c41fdb03b9}{virtual std\-::string {\bfseries id} () const }\label{class_d_x_1_1_audio_1_1_abstract_audio_device_a300d1e3c5fcdf11dc99c82c41fdb03b9}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_d_x_1_1_audio_1_1_abstract_audio_device_afe188c72c304c3ad1f7f77f779439c81}{{\bfseries Abstract\-Audio\-Device} (const \hyperlink{class_d_x_1_1_audio_1_1_abstract_audio_device}{Abstract\-Audio\-Device} \&)}\label{class_d_x_1_1_audio_1_1_abstract_audio_device_afe188c72c304c3ad1f7f77f779439c81}
+
+\item 
+\hypertarget{class_d_x_1_1_audio_1_1_abstract_audio_device_ab30ae887030ab1cf0facb2fa436d6e90}{{\bfseries Abstract\-Audio\-Device} (\hyperlink{class_d_x_1_1_audio_1_1_abstract_audio_device}{Abstract\-Audio\-Device} \&\&)}\label{class_d_x_1_1_audio_1_1_abstract_audio_device_ab30ae887030ab1cf0facb2fa436d6e90}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_d_x_1_1_audio_1_1_abstract_audio_device_a5cf5daa514cf4bb7baa2d7ddbd63af5a}{\hyperlink{classstd_1_1shared__ptr}{std\-::shared\-\_\-ptr}\\*
+$<$ Abstract\-Audio\-Device\-Impl $>$ {\bfseries m\-\_\-impl}}\label{class_d_x_1_1_audio_1_1_abstract_audio_device_a5cf5daa514cf4bb7baa2d7ddbd63af5a}
+
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_d_x_1_1_audio_1_1_abstract_audio_device_a04f96566766f09f439a3a13c5fcbe408}{class {\bfseries Audio\-Device\-Manager\-Impl}}\label{class_d_x_1_1_audio_1_1_abstract_audio_device_a04f96566766f09f439a3a13c5fcbe408}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_d_x_1_1_audio_1_1_abstract_audio_device}{Abstract\-Audio\-Device} is the base class for any system-\/recognized hardware. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Audio/Abstract\-Audio\-Device.\-h\item 
+Audio/Abstract\-Audio\-Device.\-cpp\end{DoxyCompactItemize}

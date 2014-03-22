@@ -1,0 +1,98 @@
+\hypertarget{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier}{\section{D\-X\-:\-:Lock\-Free\-:\-:Cyclic\-Spin\-Barrier Class Reference}
+\label{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier}\index{D\-X\-::\-Lock\-Free\-::\-Cyclic\-Spin\-Barrier@{D\-X\-::\-Lock\-Free\-::\-Cyclic\-Spin\-Barrier}}
+}
+
+
+\hyperlink{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier}{Cyclic\-Spin\-Barrier} is an \hyperlink{class_d_x_1_1_lock_free_1_1_abstract_barrier}{Abstract\-Barrier} implementation that will reset itself after all calls to \hyperlink{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier_af9b42b0455c7251bda38694a2df17d11}{wait()} have unblocked. This allows for barrier use within loops that require blocking at the end, or other similar scenarios.  
+
+
+
+
+{\ttfamily \#include $<$Cyclic\-Spin\-Barrier.\-h$>$}
+
+Inheritance diagram for D\-X\-:\-:Lock\-Free\-:\-:Cyclic\-Spin\-Barrier\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier_a857ff57e8576bee333452b0f3f3f1515}{Cyclic\-Spin\-Barrier} (size\-\_\-t num\-Threads=2)
+\item 
+void \hyperlink{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier_af9b42b0455c7251bda38694a2df17d11}{wait} () const 
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier}{Cyclic\-Spin\-Barrier} is an \hyperlink{class_d_x_1_1_lock_free_1_1_abstract_barrier}{Abstract\-Barrier} implementation that will reset itself after all calls to \hyperlink{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier_af9b42b0455c7251bda38694a2df17d11}{wait()} have unblocked. This allows for barrier use within loops that require blocking at the end, or other similar scenarios. 
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} process(\hyperlink{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier_a857ff57e8576bee333452b0f3f3f1515}{CyclicSpinBarrier}& barrier1, \hyperlink{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier_a857ff57e8576bee333452b0f3f3f1515}{CyclicSpinBarrier}& barrier2)
+\{
+    \textcolor{keywordflow}{while}(\textcolor{keyword}{true})
+    \{
+        \textcolor{comment}{// Do some work}
+        barrier1.wait();
+        barrier2.wait();
+    \}
+\}
+
+\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])
+\{
+    \hyperlink{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier_a857ff57e8576bee333452b0f3f3f1515}{CyclicSpinBarrier} innerBarrier(5);
+    \hyperlink{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier_a857ff57e8576bee333452b0f3f3f1515}{CyclicSpinBarrier} outerBarrier(5);
+
+    \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < 4; ++i)
+        std::thread(&process, innerBarrier, outerBarrier);
+
+    \textcolor{keywordflow}{while}(\textcolor{keyword}{true})
+    \{
+        barrier1.wait();
+        \textcolor{comment}{// Here, work has completed in all threads for the current loop}
+        \textcolor{comment}{// Do something synchronous with the work}
+        barrier2.wait();    \textcolor{comment}{// Allows all threads to continue looping}
+    \}
+
+    \textcolor{keywordflow}{return} 0;        
+\}
+\end{DoxyCode}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier_a857ff57e8576bee333452b0f3f3f1515}{\index{D\-X\-::\-Lock\-Free\-::\-Cyclic\-Spin\-Barrier@{D\-X\-::\-Lock\-Free\-::\-Cyclic\-Spin\-Barrier}!Cyclic\-Spin\-Barrier@{Cyclic\-Spin\-Barrier}}
+\index{Cyclic\-Spin\-Barrier@{Cyclic\-Spin\-Barrier}!DX::LockFree::CyclicSpinBarrier@{D\-X\-::\-Lock\-Free\-::\-Cyclic\-Spin\-Barrier}}
+\subsubsection[{Cyclic\-Spin\-Barrier}]{\setlength{\rightskip}{0pt plus 5cm}D\-X\-::\-Lock\-Free\-::\-Cyclic\-Spin\-Barrier\-::\-Cyclic\-Spin\-Barrier (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{num\-Threads = {\ttfamily 2}}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier_a857ff57e8576bee333452b0f3f3f1515}
+Constructs a Cyclic\-Spinbarrier with a number of threads to wait on. This number defaults to 2, so Cyclic\-Spinbarriers can be constructed by calling\-: 
+\begin{DoxyCode}
+\hyperlink{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier_a857ff57e8576bee333452b0f3f3f1515}{CyclicSpinBarrier}();
+\end{DoxyCode}
+
+
+Although this is not recommended. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier_af9b42b0455c7251bda38694a2df17d11}{\index{D\-X\-::\-Lock\-Free\-::\-Cyclic\-Spin\-Barrier@{D\-X\-::\-Lock\-Free\-::\-Cyclic\-Spin\-Barrier}!wait@{wait}}
+\index{wait@{wait}!DX::LockFree::CyclicSpinBarrier@{D\-X\-::\-Lock\-Free\-::\-Cyclic\-Spin\-Barrier}}
+\subsubsection[{wait}]{\setlength{\rightskip}{0pt plus 5cm}void D\-X\-::\-Lock\-Free\-::\-Cyclic\-Spin\-Barrier\-::wait (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier_af9b42b0455c7251bda38694a2df17d11}
+Blocks the current thread of execution until all other \hyperlink{class_d_x_1_1_lock_free_1_1_cyclic_spin_barrier_af9b42b0455c7251bda38694a2df17d11}{wait()} calls have beem made 
+
+Implements \hyperlink{class_d_x_1_1_lock_free_1_1_abstract_barrier_a9040adf7507467e5a653bdaf2fbd17a6}{D\-X\-::\-Lock\-Free\-::\-Abstract\-Barrier}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Lock\-Free/\-Mutex/Cyclic\-Spin\-Barrier.\-h\item 
+Lock\-Free/\-Mutex/Cyclic\-Spin\-Barrier.\-cpp\end{DoxyCompactItemize}

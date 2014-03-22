@@ -1,0 +1,134 @@
+\hypertarget{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{\section{D\-X\-:\-:Lock\-Free\-:\-:Spin\-R\-W\-Mutex Class Reference}
+\label{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}\index{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex@{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex}}
+}
+
+
+\hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex} is a leightweight mutex that supports multiple readers (const-\/only access) and a single writer. Supports readers up to the maximum value of size\-\_\-t for your system.  
+
+
+
+
+{\ttfamily \#include $<$Spin\-R\-W\-Mutex.\-h$>$}
+
+Inheritance diagram for D\-X\-:\-:Lock\-Free\-:\-:Spin\-R\-W\-Mutex\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex_a71e9aef3a5e51ca1f74b765e3b123261}{lock\-Reader} () const 
+\item 
+void \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex_a183780cdd01f30fef36febe8e7a7f9b7}{lock\-Writer} () const 
+\item 
+void \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex_a64d2de6d900ba6eaeea1a0a76ac4ff5d}{unlock\-Reader} () const 
+\item 
+void \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex_af20a514e5cc56ac5fbf6ab7759fafe1c}{unlock\-Writer} () const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex} is a leightweight mutex that supports multiple readers (const-\/only access) and a single writer. Supports readers up to the maximum value of size\-\_\-t for your system. 
+
+Calls to lock() from readers will block if a writer holds the lock. Calls to lock() from writers will block if there are any readers or writers holding onto the lock.
+
+\begin{DoxyNote}{Note}
+\hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex} is favored towards writers attempting to get the lock
+
+\hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex} is easiest to use with \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_lock}{Spin\-R\-W\-Lock}. \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_lock}{Spin\-R\-W\-Lock} lets you \char`\"{}set-\/it-\/and-\/forget-\/it\char`\"{} in regards to remembering if you're a reader/writer.
+
+\hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex} does {\itshape N\-O\-T} check to ensure that calls to lock/unlock are called with the same boolean. It does handle these cases (crash-\/wise), but calling lock(true) and unlock(false) from the same thread does not unlock the writer lock.
+\end{DoxyNote}
+
+\begin{DoxyCode}
+\textcolor{keyword}{mutable} SpinRWMutex myRWMutex;
+MyClass myClass;
+
+\textcolor{keywordtype}{void} setMyClass(\textcolor{keyword}{const} MyClass& other)
+\{
+    myRWMutex.lock(\textcolor{keyword}{true}); \textcolor{comment}{// true indicates a writer}
+    myClass = other;
+    myRWMutex.unlock(\textcolor{keyword}{true}); \textcolor{comment}{// unlock my writer reference            }
+\}
+
+MyClass getMyClass()\textcolor{keyword}{ const}
+\textcolor{keyword}{}\{
+    \textcolor{comment}{// static , thread-local object so it isn't constructed every function call, only copied}
+    \textcolor{keyword}{static} thread\_local MyClass ret;
+    myRWMutex.lock(\textcolor{keyword}{false}); \textcolor{comment}{// false indicates reader}
+    ret = myClass;
+    myRwMutex.unlock(\textcolor{keyword}{false}); \textcolor{comment}{// unlock my reader reference}
+    \textcolor{keywordflow}{return} ret;
+\}
+\end{DoxyCode}
+ 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex_a71e9aef3a5e51ca1f74b765e3b123261}{\index{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex@{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex}!lock\-Reader@{lock\-Reader}}
+\index{lock\-Reader@{lock\-Reader}!DX::LockFree::SpinRWMutex@{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex}}
+\subsubsection[{lock\-Reader}]{\setlength{\rightskip}{0pt plus 5cm}void D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex\-::lock\-Reader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex_a71e9aef3a5e51ca1f74b765e3b123261}
+Locks this \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex} as a reader. Depending on the state of the object, this call may or may not block.
+
+\begin{DoxyNote}{Note}
+This call gauantees to not block if only readers have locks. Unspecified otherwise. 
+\end{DoxyNote}
+
+
+Implements \hyperlink{class_d_x_1_1_lock_free_1_1_r_w_mutex_a52009c1be555162b437e2c53eb3026c4}{D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex}.
+
+\hypertarget{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex_a183780cdd01f30fef36febe8e7a7f9b7}{\index{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex@{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex}!lock\-Writer@{lock\-Writer}}
+\index{lock\-Writer@{lock\-Writer}!DX::LockFree::SpinRWMutex@{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex}}
+\subsubsection[{lock\-Writer}]{\setlength{\rightskip}{0pt plus 5cm}void D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex\-::lock\-Writer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex_a183780cdd01f30fef36febe8e7a7f9b7}
+Locks this \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex} as a writer. Depending on the state of the object, this call may or may not block.
+
+\begin{DoxyNote}{Note}
+This call gauantees to not block if there are no other readers or writers currently have locks. Unspecified otherwsie. 
+\end{DoxyNote}
+
+
+Implements \hyperlink{class_d_x_1_1_lock_free_1_1_r_w_mutex_aaa10a03593e166b02c99455645b49800}{D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex}.
+
+\hypertarget{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex_a64d2de6d900ba6eaeea1a0a76ac4ff5d}{\index{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex@{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex}!unlock\-Reader@{unlock\-Reader}}
+\index{unlock\-Reader@{unlock\-Reader}!DX::LockFree::SpinRWMutex@{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex}}
+\subsubsection[{unlock\-Reader}]{\setlength{\rightskip}{0pt plus 5cm}void D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex\-::unlock\-Reader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex_a64d2de6d900ba6eaeea1a0a76ac4ff5d}
+Releases a reader lock on the \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex}. This call does not block. \begin{DoxyNote}{Note}
+Assumes that this call has been properly paired with a call to \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex_a71e9aef3a5e51ca1f74b765e3b123261}{lock\-Reader()} 
+\end{DoxyNote}
+
+
+Implements \hyperlink{class_d_x_1_1_lock_free_1_1_r_w_mutex_a52ac4bfa7f6104ef271f468f2bb69eae}{D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex}.
+
+\hypertarget{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex_af20a514e5cc56ac5fbf6ab7759fafe1c}{\index{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex@{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex}!unlock\-Writer@{unlock\-Writer}}
+\index{unlock\-Writer@{unlock\-Writer}!DX::LockFree::SpinRWMutex@{D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex}}
+\subsubsection[{unlock\-Writer}]{\setlength{\rightskip}{0pt plus 5cm}void D\-X\-::\-Lock\-Free\-::\-Spin\-R\-W\-Mutex\-::unlock\-Writer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex_af20a514e5cc56ac5fbf6ab7759fafe1c}
+Releases a writer lock on the \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex}{Spin\-R\-W\-Mutex}. This call does not block. \begin{DoxyNote}{Note}
+Assumes that this call has been properly paired with a call to \hyperlink{class_d_x_1_1_lock_free_1_1_spin_r_w_mutex_a183780cdd01f30fef36febe8e7a7f9b7}{lock\-Writer()} 
+\end{DoxyNote}
+
+
+Implements \hyperlink{class_d_x_1_1_lock_free_1_1_r_w_mutex_af5d65dc65d6800b73d93b43cb7de559b}{D\-X\-::\-Lock\-Free\-::\-R\-W\-Mutex}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Lock\-Free/\-Mutex/Spin\-R\-W\-Mutex.\-h\item 
+Lock\-Free/\-Mutex/Spin\-R\-W\-Mutex.\-cpp\end{DoxyCompactItemize}

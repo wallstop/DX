@@ -1,0 +1,92 @@
+\hypertarget{class_d_x_1_1_lock_free_1_1_spin_barrier}{\section{D\-X\-:\-:Lock\-Free\-:\-:Spin\-Barrier Class Reference}
+\label{class_d_x_1_1_lock_free_1_1_spin_barrier}\index{D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier@{D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier}}
+}
+
+
+\hyperlink{class_d_x_1_1_lock_free_1_1_spin_barrier}{Spin\-Barrier} is designed for use to synchronize workflow between multiple threads. Calls to \hyperlink{class_d_x_1_1_lock_free_1_1_spin_barrier_a869688c05d8edae270a0e549c36c163d}{wait()} will block until some specified number of threads have called \hyperlink{class_d_x_1_1_lock_free_1_1_spin_barrier_a869688c05d8edae270a0e549c36c163d}{wait()}, after which all threads will unblock and continue execution.  
+
+
+
+
+{\ttfamily \#include $<$Spin\-Barrier.\-h$>$}
+
+Inheritance diagram for D\-X\-:\-:Lock\-Free\-:\-:Spin\-Barrier\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_d_x_1_1_lock_free_1_1_spin_barrier}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_d_x_1_1_lock_free_1_1_spin_barrier_acdde1ae097ee3f67636e3da90dae341d}{Spin\-Barrier} (size\-\_\-t num\-Threads=2)
+\item 
+\hyperlink{class_d_x_1_1_lock_free_1_1_spin_barrier_acbcdf2ddd0a3a682cca03b8950f48db3}{$\sim$\-Spin\-Barrier} ()
+\item 
+void \hyperlink{class_d_x_1_1_lock_free_1_1_spin_barrier_a869688c05d8edae270a0e549c36c163d}{wait} () const 
+\item 
+void \hyperlink{class_d_x_1_1_lock_free_1_1_spin_barrier_aea53e68d38677f716835dd5ad80279ba}{reset} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_d_x_1_1_lock_free_1_1_spin_barrier}{Spin\-Barrier} is designed for use to synchronize workflow between multiple threads. Calls to \hyperlink{class_d_x_1_1_lock_free_1_1_spin_barrier_a869688c05d8edae270a0e549c36c163d}{wait()} will block until some specified number of threads have called \hyperlink{class_d_x_1_1_lock_free_1_1_spin_barrier_a869688c05d8edae270a0e549c36c163d}{wait()}, after which all threads will unblock and continue execution. 
+
+\begin{DoxyNote}{Note}
+\hyperlink{class_d_x_1_1_lock_free_1_1_spin_barrier}{Spin\-Barrier} is a form of a single-\/use barrier. For continued use, call \hyperlink{class_d_x_1_1_lock_free_1_1_spin_barrier_aea53e68d38677f716835dd5ad80279ba}{reset()} in a threadsafe fashion. 
+\end{DoxyNote}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_d_x_1_1_lock_free_1_1_spin_barrier_acdde1ae097ee3f67636e3da90dae341d}{\index{D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier@{D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier}!Spin\-Barrier@{Spin\-Barrier}}
+\index{Spin\-Barrier@{Spin\-Barrier}!DX::LockFree::SpinBarrier@{D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier}}
+\subsubsection[{Spin\-Barrier}]{\setlength{\rightskip}{0pt plus 5cm}D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier\-::\-Spin\-Barrier (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{num\-Threads = {\ttfamily 2}}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_lock_free_1_1_spin_barrier_acdde1ae097ee3f67636e3da90dae341d}
+Constructs a \hyperlink{class_d_x_1_1_lock_free_1_1_spin_barrier}{Spin\-Barrier} that is set up to wait on some number of threads 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em num\-Threads} & The number of threads that are expected to use this barrier \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_d_x_1_1_lock_free_1_1_spin_barrier_acbcdf2ddd0a3a682cca03b8950f48db3}{\index{D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier@{D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier}!$\sim$\-Spin\-Barrier@{$\sim$\-Spin\-Barrier}}
+\index{$\sim$\-Spin\-Barrier@{$\sim$\-Spin\-Barrier}!DX::LockFree::SpinBarrier@{D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier}}
+\subsubsection[{$\sim$\-Spin\-Barrier}]{\setlength{\rightskip}{0pt plus 5cm}D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier\-::$\sim$\-Spin\-Barrier (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_lock_free_1_1_spin_barrier_acbcdf2ddd0a3a682cca03b8950f48db3}
+Blocks the current thread of execution until all other \hyperlink{class_d_x_1_1_lock_free_1_1_spin_barrier_a869688c05d8edae270a0e549c36c163d}{wait()} calls have been made 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_d_x_1_1_lock_free_1_1_spin_barrier_aea53e68d38677f716835dd5ad80279ba}{\index{D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier@{D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier}!reset@{reset}}
+\index{reset@{reset}!DX::LockFree::SpinBarrier@{D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier\-::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_d_x_1_1_lock_free_1_1_spin_barrier_aea53e68d38677f716835dd5ad80279ba}
+Resets the \hyperlink{class_d_x_1_1_lock_free_1_1_spin_barrier}{Spin\-Barrier} to its initial state, for continued usage.
+
+\begin{DoxyNote}{Note}
+\hyperlink{class_d_x_1_1_lock_free_1_1_spin_barrier_aea53e68d38677f716835dd5ad80279ba}{reset()} is N\-O\-T thread safe. 
+\end{DoxyNote}
+\hypertarget{class_d_x_1_1_lock_free_1_1_spin_barrier_a869688c05d8edae270a0e549c36c163d}{\index{D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier@{D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier}!wait@{wait}}
+\index{wait@{wait}!DX::LockFree::SpinBarrier@{D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier}}
+\subsubsection[{wait}]{\setlength{\rightskip}{0pt plus 5cm}void D\-X\-::\-Lock\-Free\-::\-Spin\-Barrier\-::wait (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_d_x_1_1_lock_free_1_1_spin_barrier_a869688c05d8edae270a0e549c36c163d}
+Blocks the current thread of execution until all other \hyperlink{class_d_x_1_1_lock_free_1_1_spin_barrier_a869688c05d8edae270a0e549c36c163d}{wait()} calls have beem made 
+
+Implements \hyperlink{class_d_x_1_1_lock_free_1_1_abstract_barrier_a9040adf7507467e5a653bdaf2fbd17a6}{D\-X\-::\-Lock\-Free\-::\-Abstract\-Barrier}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Lock\-Free/\-Mutex/Spin\-Barrier.\-h\item 
+Lock\-Free/\-Mutex/Spin\-Barrier.\-cpp\end{DoxyCompactItemize}
