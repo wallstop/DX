@@ -32,7 +32,8 @@ namespace Audio {
     {
     public:
 
-        AudioPlaybackDeviceImpl(IMMDevice* mmDevice = nullptr, IAudioRenderClient* playbackClient = nullptr);
+        AudioPlaybackDeviceImpl(IMMDevice* mmDevice = nullptr, 
+            IAudioRenderClient* playbackClient = nullptr, int deviceMode = 0);
         virtual ~AudioPlaybackDeviceImpl();
 
         virtual bool        initialize();

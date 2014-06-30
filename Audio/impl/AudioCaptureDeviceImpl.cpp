@@ -27,8 +27,8 @@ namespace Audio {
 	
 #ifdef WIN32
 
-    AudioCaptureDeviceImpl::AudioCaptureDeviceImpl(IMMDevice *mmDevice, IAudioCaptureClient* captureClient) 
-        : AbstractAudioDeviceImpl(mmDevice), m_captureClient(captureClient)
+    AudioCaptureDeviceImpl::AudioCaptureDeviceImpl(IMMDevice *mmDevice, IAudioCaptureClient* captureClient, int deviceMode) 
+        : AbstractAudioDeviceImpl(mmDevice, deviceMode), m_captureClient(captureClient)
     {
     }
 

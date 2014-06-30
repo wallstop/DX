@@ -28,6 +28,7 @@
 #ifdef WIN32
 
 #include <atlbase.h>
+#include <functiondiscoverykeys_devpkey.h>
 
 #endif
 
@@ -51,6 +52,30 @@ namespace Audio {
         return enumerator;
     }
 
+    static std::string getDeviceID(IMMDevice* mmDevice)
+    {
+        // Try and grab a friendly version of the device name
+        std::string ret = "";
+        IPropertyStore *propertyStore = nullptr;
+        int ok = mmDevice->OpenPropertyStore(STGM_READ, &propertyStore);
+        if(ok < 0 || propertyStore == nullptr)
+        {
+            // Unable to get the property store (that's ok, just continue)
+            releaseDevice(propertyStore);
+        }
+        else
+        {
+            PROPVARIANT propVariant;
+            PropVariantInit(&propVariant);
+            ok = propertyStore->GetValue(PKEY_Device_FriendlyName, &propVariant);
+            releaseDevice(propertyStore);
+            if(ok >= 0 && VT_LPWSTR == propVariant.vt)
+                ret = CW2A(propVariant.pwszVal);
+        }
+
+        return ret;
+    }
+
     AudioDeviceManagerImpl::AudioDeviceManagerImpl() : m_initialized(false)
     {
         initialize();
@@ -70,7 +95,6 @@ namespace Audio {
             if(m_initialized)
             {
                 getDeviceEnumeratorSingleton();
-                enumerateAllDevices();
                 enumerateAllDevices();
             }
         }
@@ -221,6 +245,13 @@ namespace Audio {
         return ret;
     }
 
+    /*
+        TODO: This is an extremely bad way of performing this operation, as we most likely already have the device
+        in our m_devices set. Blowing away the devices is bad, making a new handle is bad (as the destruction of that
+        object will screw everything up for the object in the set, although they won't know)
+
+        So, figure out a way to fix this.
+    */
     template <typename DeviceType, typename DeviceTypeImpl, ::EDataFlow flowType, ::ERole role>
     std::shared_ptr<DeviceType> AudioDeviceManagerImpl::getDefaultDeviceOfType(int deviceMode)
     {
@@ -230,9 +261,6 @@ namespace Audio {
         IMMDeviceEnumerator*& deviceEnumerator = getDeviceEnumeratorSingleton();
         if(!deviceEnumerator)
             return std::shared_ptr<DeviceType>();
-
-        // Clear out everything we know about - we're starting fresh
-        //removeDevicesOfType<DeviceType>();
 
         IMMDevice *device = nullptr; 
         auto ptr = &device;
@@ -245,11 +273,27 @@ namespace Audio {
             return std::shared_ptr<DeviceType>();
         }
 
-        std::shared_ptr<DeviceTypeImpl> defaultDeviceImpl = std::make_shared<DeviceTypeImpl>(device);
+        const std::string deviceId = getDeviceID(device);
+        // So now we check if we have a device with a handle to that particular IMMDevice
+        for(auto& device : m_devices)
+        {
+            if(device.get() != nullptr && device->m_impl != nullptr && device->m_impl->m_mmDevice != nullptr)
+            {
+                if(device->id().compare(deviceId) == 0)
+                {
+                    // Make sure we're not returning a handle to the wrong kind of device
+                    auto ret = std::dynamic_pointer_cast<DeviceType>(device);
+                    if(ret && device->m_impl->m_deviceMode == deviceMode)
+                        return ret;
+                }
+            }
+        }
+
+        // TODO: Currently this is bad and will not properly blow things away if someone has a handle to our device with a different device mode...
+        std::shared_ptr<DeviceTypeImpl> defaultDeviceImpl = std::make_shared<DeviceTypeImpl>(DeviceTypeImpl(device, nullptr, deviceMode));
         std::shared_ptr<DeviceType> defaultDevice = std::make_shared<DeviceType>();
-        defaultDeviceImpl->m_deviceMode = deviceMode;
-        defaultDevice->m_impl = defaultDeviceImpl;        
-        //m_devices.insert(defaultDevice);    
+        defaultDevice->m_impl = defaultDeviceImpl;   
+        m_devices.insert(defaultDevice);    
 
         return defaultDevice;
     }

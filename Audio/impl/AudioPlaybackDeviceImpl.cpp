@@ -28,8 +28,8 @@ namespace Audio {
 
 #ifdef WIN32
 	
-    AudioPlaybackDeviceImpl::AudioPlaybackDeviceImpl(IMMDevice* mmDevice, IAudioRenderClient* playbackClient) 
-        : AbstractAudioDeviceImpl(mmDevice), m_playbackClient(playbackClient)
+    AudioPlaybackDeviceImpl::AudioPlaybackDeviceImpl(IMMDevice* mmDevice, IAudioRenderClient* playbackClient, int deviceMode) 
+        : AbstractAudioDeviceImpl(mmDevice, deviceMode), m_playbackClient(playbackClient)
     {
         initialize();
     }

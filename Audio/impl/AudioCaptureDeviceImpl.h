@@ -33,7 +33,7 @@ namespace Audio {
     public:
 
         AudioCaptureDeviceImpl(IMMDevice *mmDevice = nullptr, 
-            IAudioCaptureClient* captureClient = nullptr);
+            IAudioCaptureClient* captureClient = nullptr, int deviceMode = 0);
         virtual ~AudioCaptureDeviceImpl();
 
         virtual bool    initialize();
