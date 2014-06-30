@@ -31,6 +31,7 @@ namespace Audio {
     AudioPlaybackDeviceImpl::AudioPlaybackDeviceImpl(IMMDevice* mmDevice, IAudioRenderClient* playbackClient) 
         : AbstractAudioDeviceImpl(mmDevice), m_playbackClient(playbackClient)
     {
+        initialize();
     }
 
     AudioPlaybackDeviceImpl::~AudioPlaybackDeviceImpl()

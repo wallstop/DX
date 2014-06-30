@@ -38,7 +38,7 @@ namespace Audio {
 
     // ONLY CALL IF CoInitialize() has already been called
     // This will clean up after itself on application exit (poorly)
-    static IMMDeviceEnumerator* getDeviceEnumeratorSingleton()
+    static IMMDeviceEnumerator*& getDeviceEnumeratorSingleton()
     {
         static IMMDeviceEnumerator* enumerator = nullptr;
         if(!enumerator)
@@ -70,7 +70,8 @@ namespace Audio {
             if(m_initialized)
             {
                 getDeviceEnumeratorSingleton();
-                //enumerateAllDevices();
+                enumerateAllDevices();
+                enumerateAllDevices();
             }
         }
 		return m_initialized;
@@ -98,7 +99,7 @@ namespace Audio {
     template <typename DeviceType, typename DeviceTypeImpl, ::EDataFlow flowType>
     void AudioDeviceManagerImpl::enumerateDevicesOfType()
     {
-        IMMDeviceEnumerator* deviceEnumerator = getDeviceEnumeratorSingleton();
+        IMMDeviceEnumerator*& deviceEnumerator = getDeviceEnumeratorSingleton();
         if(!deviceEnumerator)
         {
             // Unable to get a handle on the device enumerator
@@ -139,8 +140,9 @@ namespace Audio {
                 releaseDevice(currentDevice);
                 continue;
             }
+            // TODO: Change this from 0 to some parameterized type or something
             std::shared_ptr<DeviceTypeImpl> deviceImpl = std::make_shared<DeviceTypeImpl>(currentDevice);
-            std::shared_ptr<DeviceType> device   = std::make_shared<DeviceType>();
+            std::shared_ptr<DeviceType> device = std::make_shared<DeviceType>();
             device->m_impl = deviceImpl;
             m_devices.insert(device);
         }
@@ -179,17 +181,17 @@ namespace Audio {
         return std::vector<std::shared_ptr<AbstractAudioDevice>>(m_devices.cbegin(), m_devices.cend());
     }
 
-    std::shared_ptr<AudioCaptureDevice> AudioDeviceManagerImpl::getDefaultCaptureDevice() const
+    std::shared_ptr<AudioCaptureDevice> AudioDeviceManagerImpl::getDefaultCaptureDevice()
     {
         return getDefaultDeviceOfType<AudioCaptureDevice, AudioCaptureDeviceImpl, eCapture, eConsole>(0);
     }
 
-    std::shared_ptr<AudioPlaybackDevice> AudioDeviceManagerImpl::getDefaultPlaybackDevice() const
+    std::shared_ptr<AudioPlaybackDevice> AudioDeviceManagerImpl::getDefaultPlaybackDevice()
     {
         return getDefaultDeviceOfType<AudioPlaybackDevice, AudioPlaybackDeviceImpl, eRender, eConsole>(0);
     }
 
-    std::shared_ptr<AudioCaptureDevice> AudioDeviceManagerImpl::getDefaultPlaybackDeviceAsCaptureDevice() const
+    std::shared_ptr<AudioCaptureDevice> AudioDeviceManagerImpl::getDefaultPlaybackDeviceAsCaptureDevice()
     {
         return getDefaultDeviceOfType<AudioCaptureDevice, AudioCaptureDeviceImpl, eRender, eConsole>(AUDCLNT_STREAMFLAGS_LOOPBACK);
     }
@@ -197,22 +199,13 @@ namespace Audio {
     template <typename DeviceType>
     void AudioDeviceManagerImpl::removeDevicesOfType()
     {
-        bool finished = false;
-
-        while(!finished)
+        auto iterator = m_devices.begin();
+        while(iterator != m_devices.end())
         {
-            // One at a time... there's got to be a better way
-            for(auto& device : m_devices)
-            {
-                if(std::dynamic_pointer_cast<DeviceType>(device))
-                {
-                    m_devices.erase(device);
-                    break;
-                }                
-            }
-            finished = true;
+            auto current = iterator++;
+            if(std::dynamic_pointer_cast<DeviceType>(*current))
+                m_devices.erase(*current);
         }
-
     }
 
     template <class DeviceType>
@@ -229,17 +222,21 @@ namespace Audio {
     }
 
     template <typename DeviceType, typename DeviceTypeImpl, ::EDataFlow flowType, ::ERole role>
-    std::shared_ptr<DeviceType> AudioDeviceManagerImpl::getDefaultDeviceOfType(int deviceMode) const
+    std::shared_ptr<DeviceType> AudioDeviceManagerImpl::getDefaultDeviceOfType(int deviceMode)
     {
         if(flowType != eRender && flowType != eCapture)
             return std::shared_ptr<DeviceType>();
 
-        IMMDeviceEnumerator* deviceEnumerator = getDeviceEnumeratorSingleton();
+        IMMDeviceEnumerator*& deviceEnumerator = getDeviceEnumeratorSingleton();
         if(!deviceEnumerator)
             return std::shared_ptr<DeviceType>();
 
-        IMMDevice *device = nullptr;
-        int ok = deviceEnumerator->GetDefaultAudioEndpoint(flowType, role, &device);
+        // Clear out everything we know about - we're starting fresh
+        //removeDevicesOfType<DeviceType>();
+
+        IMMDevice *device = nullptr; 
+        auto ptr = &device;
+        int ok = deviceEnumerator->GetDefaultAudioEndpoint(flowType, role, ptr);
         releaseDevice(deviceEnumerator);
         if(ok < 0 || !device)
         {
@@ -248,31 +245,12 @@ namespace Audio {
             return std::shared_ptr<DeviceType>();
         }
 
-        LPWSTR deviceIdAsLPWSTR;
-        device->GetId(&deviceIdAsLPWSTR);
-        const std::string deviceId = CW2A(deviceIdAsLPWSTR);
-
-        // So now we check if we have a device with a handle to that particular IMMDevice
-        for(auto& device : m_devices)
-        {
-            if(device.get() != nullptr && device->m_impl != nullptr && device->m_impl->m_mmDevice != nullptr)
-            {
-                if(device->id().compare(deviceId) == 0)
-                {
-                    // Make sure we're not returning a handle to the wrong kind of device
-                    auto ret = std::dynamic_pointer_cast<DeviceType>(device);
-                    if(ret && device->m_impl->m_deviceMode == deviceMode)
-                        return ret;
-                }
-            }
-        }
-
-        // If we haven't found it in our set (why isn't it there? That's weird), let's make it
         std::shared_ptr<DeviceTypeImpl> defaultDeviceImpl = std::make_shared<DeviceTypeImpl>(device);
         std::shared_ptr<DeviceType> defaultDevice = std::make_shared<DeviceType>();
         defaultDeviceImpl->m_deviceMode = deviceMode;
         defaultDevice->m_impl = defaultDeviceImpl;        
-    
+        //m_devices.insert(defaultDevice);    
+
         return defaultDevice;
     }
 

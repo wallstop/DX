@@ -55,10 +55,10 @@ namespace Audio {
         std::vector<std::shared_ptr<AudioCaptureDevice>>    getCaptureDevices() const;
         std::vector<std::shared_ptr<AudioPlaybackDevice>>   getPlaybackDevices() const;        
         std::vector<std::shared_ptr<AbstractAudioDevice>>   getAllDevices() const;
-        std::shared_ptr<AudioCaptureDevice>                 getDefaultCaptureDevice() const;
-        std::shared_ptr<AudioPlaybackDevice>                getDefaultPlaybackDevice() const;
-        std::shared_ptr<AudioCaptureDevice>                 getDefaultPlaybackDeviceAsCaptureDevice() const;
-        std::shared_ptr<AudioCaptureDevice>                 getPlaybackDeviceAsCaptureDevice(std::shared_ptr<AudioPlaybackDevice>&) const;
+        std::shared_ptr<AudioCaptureDevice>                 getDefaultCaptureDevice();
+        std::shared_ptr<AudioPlaybackDevice>                getDefaultPlaybackDevice();
+        std::shared_ptr<AudioCaptureDevice>                 getDefaultPlaybackDeviceAsCaptureDevice();
+        //std::shared_ptr<AudioCaptureDevice>                 getPlaybackDeviceAsCaptureDevice(std::shared_ptr<AudioPlaybackDevice>&) const;
 
 	private:
 
@@ -72,7 +72,7 @@ namespace Audio {
         std::vector<std::shared_ptr<DeviceType>> getDevicesOfType() const;
 
         template <typename DeviceType, typename DeviceTypeImpl, ::EDataFlow flowType, ::ERole role>
-        std::shared_ptr<DeviceType> getDefaultDeviceOfType(int deviceMode = 0) const;
+        std::shared_ptr<DeviceType> getDefaultDeviceOfType(int deviceMode = 0);
 
         void removeDevice(std::shared_ptr<AbstractAudioDevice> device);
 

@@ -57,7 +57,7 @@ namespace Audio {
 
         // still here? 
         m_initialized = true;
-        return true;
+        return m_initialized;
     }
 
     bool AudioCaptureDeviceImpl::writeToBuffer(const AudioPacket&, const AbstractFilter&)

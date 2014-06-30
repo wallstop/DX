@@ -36,14 +36,19 @@ namespace Audio {
     {
     }
 
-    AbstractAudioDeviceImpl::AbstractAudioDeviceImpl(IMMDevice *device) 
-        : m_mmDevice(device), m_client(nullptr), m_initialized(false), m_started(false)
+    AbstractAudioDeviceImpl::AbstractAudioDeviceImpl(IMMDevice *device, int deviceMode)
+        : m_mmDevice(device), m_client(nullptr), m_initialized(false), m_started(false), m_deviceMode(deviceMode)
     {
     }
 
     AbstractAudioDeviceImpl::~AbstractAudioDeviceImpl()
     {
-        stop();        
+        const bool ok = stop();   
+        if(ok)
+        {
+            ;
+
+        }
         releaseDevice(m_client);
         releaseDevice(m_mmDevice);
     }

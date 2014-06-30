@@ -49,7 +49,7 @@ namespace Audio {
     {
     public:
         AbstractAudioDeviceImpl();
-        AbstractAudioDeviceImpl(IMMDevice *mmDevice);
+        AbstractAudioDeviceImpl(IMMDevice *mmDevice, int deviceMode = 0);
         virtual ~AbstractAudioDeviceImpl();
 
         // TODO: Make this templated / argumented for "role" (loopback)
