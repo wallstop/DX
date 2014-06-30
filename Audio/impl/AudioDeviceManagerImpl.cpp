@@ -65,12 +65,13 @@ namespace Audio {
     {
         if(!m_initialized)
         {
-            int result = 0;
-            result = CoInitialize(nullptr);
-            getDeviceEnumeratorSingleton();
+            const int result = CoInitialize(nullptr);
             m_initialized = result >= 0;
-
-            //enumerateAllDevices();
+            if(m_initialized)
+            {
+                getDeviceEnumeratorSingleton();
+                //enumerateAllDevices();
+            }
         }
 		return m_initialized;
 	}
@@ -80,8 +81,8 @@ namespace Audio {
         if(m_initialized)
         {
             m_devices.clear();
-            auto deviceEnumerator = getDeviceEnumeratorSingleton();
-            releaseDevice(deviceEnumerator);
+            //auto deviceEnumerator = getDeviceEnumeratorSingleton();
+            //releaseDevice(deviceEnumerator);
             CoUninitialize();
             m_initialized = false;
         }

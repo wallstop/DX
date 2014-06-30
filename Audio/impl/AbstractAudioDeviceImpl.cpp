@@ -22,6 +22,7 @@
 #ifdef WIN32
 
 #include <atlbase.h>
+#include <functiondiscoverykeys_devpkey.h>
 
 #endif
 
@@ -56,12 +57,27 @@ namespace Audio {
             return false;
         }
 
-        LPWSTR deviceIdAsLPWSTR;
-        m_mmDevice->GetId(&deviceIdAsLPWSTR);
-        m_id = CW2A(deviceIdAsLPWSTR);
+        // Try and grab a friendly version of the device name
+        IPropertyStore *propertyStore = nullptr;
+        int ok = m_mmDevice->OpenPropertyStore(STGM_READ, &propertyStore);
+        if(ok < 0 || propertyStore == nullptr)
+        {
+            // Unable to get the property store (that's ok, just continue)
+            releaseDevice(propertyStore);
+        }
+        else
+        {
+            PROPVARIANT propVariant;
+            PropVariantInit(&propVariant);
+            ok = propertyStore->GetValue(PKEY_Device_FriendlyName, &propVariant);
+            releaseDevice(propertyStore);
+            if(ok >= 0 && VT_LPWSTR == propVariant.vt)
+                m_id = CW2A(propVariant.pwszVal);
+        }
+
 
         // Grab our AudioClient
-        int ok = m_mmDevice->Activate(__uuidof(IAudioClient), CLSCTX_ALL, NULL,
+        ok = m_mmDevice->Activate(__uuidof(IAudioClient), CLSCTX_ALL, NULL,
             reinterpret_cast<void** >(&m_client));
         if(ok < 0 || !m_client)
         {

@@ -10,14 +10,12 @@ int main(int argc, char* argv[])
         manager.initialize();
 
         auto playbackDevice = manager.getDefaultPlaybackDevice();
+        playbackDevice->initialize();
 
         //playbackDevice->
 
-
-
-
-
         auto captureDevice = manager.getDefaultCaptureDevice();
+        captureDevice->initialize();
 
     }
 

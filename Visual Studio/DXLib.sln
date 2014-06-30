@@ -21,6 +21,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DXTest", "..\Test\Visual St
 		{DB219D4E-843F-4019-A05D-8E1E728114C0} = {DB219D4E-843F-4019-A05D-8E1E728114C0}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Media Streamer", "..\Media Streamer\Visual Studio\Media Streamer.vcxproj", "{68278949-CAE3-40E7-908F-AC42452D81DA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{85CCDD2B-4F7D-4A37-BC16-A54A3678B098} = {85CCDD2B-4F7D-4A37-BC16-A54A3678B098}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -89,6 +94,16 @@ Global
 		{85CCDD2B-4F7D-4A37-BC16-A54A3678B098}.Release|Win32.Build.0 = Release|Win32
 		{85CCDD2B-4F7D-4A37-BC16-A54A3678B098}.Release|x64.ActiveCfg = Release|x64
 		{85CCDD2B-4F7D-4A37-BC16-A54A3678B098}.Release|x64.Build.0 = Release|x64
+		{68278949-CAE3-40E7-908F-AC42452D81DA}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{68278949-CAE3-40E7-908F-AC42452D81DA}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{68278949-CAE3-40E7-908F-AC42452D81DA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{68278949-CAE3-40E7-908F-AC42452D81DA}.Debug|Win32.Build.0 = Debug|Win32
+		{68278949-CAE3-40E7-908F-AC42452D81DA}.Debug|x64.ActiveCfg = Debug|Win32
+		{68278949-CAE3-40E7-908F-AC42452D81DA}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{68278949-CAE3-40E7-908F-AC42452D81DA}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{68278949-CAE3-40E7-908F-AC42452D81DA}.Release|Win32.ActiveCfg = Release|Win32
+		{68278949-CAE3-40E7-908F-AC42452D81DA}.Release|Win32.Build.0 = Release|Win32
+		{68278949-CAE3-40E7-908F-AC42452D81DA}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,5 +114,6 @@ Global
 		{59CBFA06-58DE-4068-8D0D-A93E4B051E89} = {230687D9-4FA3-4D5A-865C-550FE39E14B3}
 		{4C421402-5ECF-4D53-BEC7-71B6C988E42D} = {230687D9-4FA3-4D5A-865C-550FE39E14B3}
 		{85CCDD2B-4F7D-4A37-BC16-A54A3678B098} = {230687D9-4FA3-4D5A-865C-550FE39E14B3}
+		{68278949-CAE3-40E7-908F-AC42452D81DA} = {230687D9-4FA3-4D5A-865C-550FE39E14B3}
 	EndGlobalSection
 EndGlobal
