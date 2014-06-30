@@ -17,43 +17,55 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110 - 1301  USA
 */ /////////////////////////////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////
-// DX LockFree - First pass at an RAII object for locking and unlocking a std::mutex
-// Author: Eli Pinkerton
-// Date: 3/14/14
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
 #pragma once
 
-#include "../CacheLine.h"
+#include "../Mutex/SpinRWMutex.h"
 
-namespace std
-{
-    class mutex;
-}
+// TODO: All of this + impl
 
 namespace DX {
 namespace LockFree {
 
-    /*! \brief StdLock is a RAII lockguard for some std::mutex which acquires a lock on it upon
-        creation, and releases the lock upon destruction.
-    */
-    class StdLock
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // ListNode   
+
+    template <typename T>
+    struct ListNode
+    {
+        ListNode();
+        ~ListNode();
+
+        T* data;
+        std::atomic<ListNode*> next;
+        SpinRWMutex mutex;
+        volatile char pad_0 [CACHE_LINE_SIZE - ((sizeof(T*) + sizeof(std::atomic<Node*>) + sizeof(SpinRWMutex)) % CACHE_LINE_SIZE)];
+
+    private:
+        ListNode(const ListNode&);
+        ListNode(ListNode&&);
+    };
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // LinkedList
+
+    template <typename T>
+    class ConcurrentLinkedList
     {
     public:
-        StdLock(std::mutex& _mutex);
-        ~StdLock();
-    private:
-        std::mutex* m_mutex;
+        ConcurrentLinkedList();
+        ~ConcurrentLinkedList();
 
-        /*
-            Copy and move constructors are hidden to prevent the compiler from automatically generating
-            them for us. This class is currently NOT copyable or movable.
-        */
-        StdLock(const StdLock&);
-        StdLock(StdLock&&);
+        bool    isEmpty() const;
+        size_t  size() const;
+        
+
+    private:
+
     };
 
 }
 }
+
+

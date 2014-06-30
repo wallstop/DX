@@ -232,11 +232,11 @@ namespace Audio {
         assert(outFormat != AudioFormat());
 
         #if defined _DEBUG || defined DEBUG
-            const unsigned int numInSamples = in.getAudioFormat().samplesPerSecond;
-            const unsigned int numOutSamples = outFormat.samplesPerSecond;
+            const unsigned int& numInSamples = in.getAudioFormat().samplesPerSecond;
+            const unsigned int& numOutSamples = outFormat.samplesPerSecond;
 
-            const unsigned short bitsPerInSample = in.getAudioFormat().bitsPerSample / 8 * in.getAudioFormat().channels;
-            const unsigned short bitsPerOutSample = outFormat.bitsPerSample / 8 * outFormat.channels;
+            const unsigned int& bitsPerInSample = in.getAudioFormat().bitsPerSample / 8 * in.getAudioFormat().channels;
+            const unsigned int& bitsPerOutSample = outFormat.bitsPerSample / 8 * outFormat.channels;
 
             const double ratio = (double(numOutSamples) / double(numInSamples)) * (double(bitsPerOutSample) / double(bitsPerInSample));
 

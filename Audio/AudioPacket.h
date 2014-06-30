@@ -66,7 +66,7 @@ namespace Audio {
         AudioSample& operator=(const AudioSample& copy);
 
     private:
-        /*!< Ensure that the compiler doesn't do rval assigns*/
+        /*! Ensure that the compiler doesn't do rval assigns*/
         AudioSample& operator=(AudioSample&& move); 
 
         AudioFormat     m_audioFormat;
@@ -87,7 +87,6 @@ namespace Audio {
 
         \note operator[] and at() both return AudioSamples as opposed to pure AudioBytes. This is
         for ease of AudioFilter / DSP creation
-
     */
     class AudioPacket
     {

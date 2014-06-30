@@ -21,12 +21,12 @@
 
 // All-in-one include header
 
-#include <AudioDX/AudioCaptureDevice.h>
-#include <AudioDX/AudioPlaybackDevice.h>
-#include <AudioDX/AudioDeviceManager.h>
-#include <AudioDX/AudioFormat.h>
-#include <AudioDX/AudioPacket.h>
-#include <AudioDX/Filters/AbstractFilter.h>
-#include <AudioDX/Tasks/AbstractAudioTask.h>
-#include <AudioDX/Tasks/TaskCallback.h>
-#include <AudioDX/AudioStream.h>
+#include "AudioCaptureDevice.h"
+#include "AudioPlaybackDevice.h"
+#include "AudioDeviceManager.h"
+#include "AudioFormat.h"
+#include "AudioPacket.h"
+#include "Filters/AbstractFilter.h"
+#include "Tasks/AbstractAudioTask.h"
+#include "Tasks/TaskCallback.h"
+#include "AudioStream.h"

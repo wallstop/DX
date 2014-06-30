@@ -194,7 +194,7 @@ namespace Audio {
                 //stop();
             }
 
-            continueReading = (callback ? !callback->isTaskStopped() : ++packetsRead < maxPacketsFallback);
+            continueReading = (callback != nullptr ? !callback->isTaskStopped() : ++packetsRead < maxPacketsFallback);
         }
 
         stop();

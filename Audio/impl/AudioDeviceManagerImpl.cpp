@@ -37,7 +37,7 @@ namespace Audio {
 #ifdef WIN32
 
     // ONLY CALL IF CoInitialize() has already been called
-    // This will clean up after itself on application exit
+    // This will clean up after itself on application exit (poorly)
     static IMMDeviceEnumerator* getDeviceEnumeratorSingleton()
     {
         static IMMDeviceEnumerator* enumerator = nullptr;
@@ -46,9 +46,7 @@ namespace Audio {
             int ok = CoCreateInstance(__uuidof(MMDeviceEnumerator), NULL,
                 CLSCTX_ALL, __uuidof(IMMDeviceEnumerator), reinterpret_cast<void** >(&enumerator));
             if(ok < 0)
-            {
                 releaseDevice(enumerator);
-            }
         }
         return enumerator;
     }
@@ -63,13 +61,13 @@ namespace Audio {
         unInitialize();
     }
 
-
     bool AudioDeviceManagerImpl::initialize()
     {
         if(!m_initialized)
         {
             int result = 0;
             result = CoInitialize(nullptr);
+            getDeviceEnumeratorSingleton();
             m_initialized = result >= 0;
 
             //enumerateAllDevices();
@@ -82,6 +80,8 @@ namespace Audio {
         if(m_initialized)
         {
             m_devices.clear();
+            auto deviceEnumerator = getDeviceEnumeratorSingleton();
+            releaseDevice(deviceEnumerator);
             CoUninitialize();
             m_initialized = false;
         }

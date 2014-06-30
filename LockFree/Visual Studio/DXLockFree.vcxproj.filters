@@ -51,6 +51,7 @@
     <ClInclude Include="..\Containers\ConcurrentStream.h">
       <Filter>Containers</Filter>
     </ClInclude>
+    <ClInclude Include="..\Containers\ConcurrentLinkedList.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Mutex\CyclicSpinBarrier.cpp">

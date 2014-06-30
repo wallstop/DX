@@ -60,6 +60,9 @@
     <ClCompile Include="..\impl\AudioPlaybackDeviceImpl.cpp">
       <Filter>impl</Filter>
     </ClCompile>
+    <ClCompile Include="..\AudioDevice.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\AudioFormat.h">
@@ -113,6 +116,9 @@
     </ClInclude>
     <ClInclude Include="..\impl\AudioPlaybackDeviceImpl.h">
       <Filter>impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AudioDevice.h">
+      <Filter>API</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
