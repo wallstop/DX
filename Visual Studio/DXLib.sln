@@ -1,11 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DX", "DX", "{230687D9-4FA3-4D5A-865C-550FE39E14B3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DXAudio", "..\Audio\Visual Studio\DXAudio.vcxproj", "{DB219D4E-843F-4019-A05D-8E1E728114C0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{59CBFA06-58DE-4068-8D0D-A93E4B051E89} = {59CBFA06-58DE-4068-8D0D-A93E4B051E89}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DXNetwork", "..\Network\Visual Studio\DXNetwork.vcxproj", "{458961B3-4593-4E93-83E0-F41C688FFBE8}"
 EndProject
@@ -14,6 +17,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DXLog", "..\Log\Visual Studio\DXLog\DXLog.vcxproj", "{4C421402-5ECF-4D53-BEC7-71B6C988E42D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DXTest", "..\Test\Visual Studio\DXTest.vcxproj", "{85CCDD2B-4F7D-4A37-BC16-A54A3678B098}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DB219D4E-843F-4019-A05D-8E1E728114C0} = {DB219D4E-843F-4019-A05D-8E1E728114C0}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
